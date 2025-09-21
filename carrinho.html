@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho - DrDerm</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <h1>DrDerm</h1>
+                    <span class="tagline">Produtos Dermatológicos</span>
+                </a>
+            </div>
+            <nav class="nav">
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">Início</a>
+                    <a href="index.html#produtos" class="nav-link">Produtos</a>
+                </div>
+                <div class="nav-actions">
+                    <a href="carrinho.html" class="nav-icon" title="Carrinho">
+                        <span class="icon">🛒</span>
+                        <span class="badge" id="cartCount">0</span>
+                    </a>
+                    <div class="user-menu">
+                        <span class="nav-icon user-toggle" title="Minha Conta">👤</span>
+                        <div class="dropdown-menu">
+                            <a href="login.html">Entrar</a>
+                            <a href="cadastro.html">Cadastrar</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="cart-container">
+        <h1>Meu Carrinho</h1>
+        
+        <div class="cart-content">
+            <div class="cart-items" id="cartItems">
+                <!-- Items will be populated by JavaScript -->
+            </div>
+            
+            <div class="cart-summary">
+                <h3>Resumo do Pedido</h3>
+                <div class="summary-line">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">R$ 0,00</span>
+                </div>
+                <div class="summary-line">
+                    <span>Frete:</span>
+                    <span id="shipping">R$ 0,00</span>
+                </div>
+                <div class="summary-line total">
+                    <span>Total:</span>
+                    <span id="total">R$ 0,00</span>
+                </div>
+                
+                <div class="cep-section">
+                    <input type="text" placeholder="CEP" id="cepCart">
+                    <button onclick="calculateShipping()">Calcular Frete</button>
+                </div>
+                
+                <button class="btn-checkout" onclick="checkout()">Finalizar Compra</button>
+            </div>
+        </div>
+        
+        <div class="empty-cart" id="emptyCart" style="display: none;">
+            <h2>Seu carrinho está vazio</h2>
+            <p>Adicione produtos para continuar</p>
+            <a href="index.html" class="btn-primary">Continuar Comprando</a>
+        </div>
+    </main>
+
+    <script src="cart.js"></script>
+</body>
+</html>

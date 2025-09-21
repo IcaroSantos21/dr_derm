@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - DrDerm</title>
+    <link rel="stylesheet" href="auth.css">
+    <link rel="stylesheet" href="header.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="logo">
+                <h1>DrDerm</h1>
+                <p>Produtos Dermatológicos</p>
+            </div>
+            
+            <form class="auth-form" id="registerForm">
+                <h2>Criar Conta</h2>
+                
+                <div class="form-group">
+                    <input type="text" id="name" placeholder="Nome completo" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="E-mail" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="text" id="crm" placeholder="CRM (opcional)">
+                </div>
+                
+                <div class="form-group">
+                    <input type="password" id="password" placeholder="Senha" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="password" id="confirmPassword" placeholder="Confirmar senha" required>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">Aceito os termos de uso</label>
+                </div>
+                
+                <button type="submit" class="btn-primary">Criar Conta</button>
+                
+                <div class="auth-links">
+                    <a href="login.html">Já tenho conta</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrDerm - Produtos Dermatológicos Profissionais</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="header.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <h1>DrDerm</h1>
+                    <span class="tagline">Produtos Dermatológicos</span>
+                </a>
+            </div>
+            <nav class="nav">
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link active">Início</a>
+                    <a href="#produtos" class="nav-link">Produtos</a>
+                    <a href="#" class="nav-link">Categorias</a>
+                </div>
+                <div class="search-container">
+                    <input type="text" class="search-bar" placeholder="Buscar produtos...">
+                    <button class="search-btn">🔍</button>
+                </div>
+                <div class="nav-actions">
+                    <a href="#" class="nav-icon" title="Favoritos">
+                        <span class="icon">❤️</span>
+                        <span class="badge" id="favCount">0</span>
+                    </a>
+                    <a href="carrinho.html" class="nav-icon" title="Carrinho">
+                        <span class="icon">🛒</span>
+                        <span class="badge" id="cartCount">0</span>
+                    </a>
+                    <div class="user-menu">
+                        <span class="nav-icon user-toggle" title="Minha Conta">👤</span>
+                        <div class="dropdown-menu">
+                            <a href="login.html">Entrar</a>
+                            <a href="cadastro.html">Cadastrar</a>
+                            <a href="#" onclick="logout()">Sair</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </header>
+
+    <!-- Categories -->
+    <section class="categories">
+        <div class="container">
+            <div class="category-item">Skincare</div>
+            <div class="category-item">Agulhas</div>
+            <div class="category-item">Toxinas</div>
+            <div class="category-item">Preenchedores</div>
+            <div class="category-item">Equipamentos</div>
+            <div class="category-item">Cosméticos</div>
+        </div>
+    </section>
+
+    <!-- Carousel -->
+    <section class="carousel-section">
+        <div class="carousel">
+            <div class="carousel-item active">
+                <div class="promo-content">
+                    <h2>Promoção Especial</h2>
+                    <p>Até 30% OFF em produtos selecionados</p>
+                    <button class="btn-promo">Ver Ofertas</button>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="promo-content">
+                    <h2>Lançamentos</h2>
+                    <p>Novos produtos para sua clínica</p>
+                    <button class="btn-promo">Conferir</button>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="promo-content">
+                    <h2>Frete Grátis</h2>
+                    <p>Em compras acima de R$ 500</p>
+                    <button class="btn-promo">Aproveitar</button>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-dots">
+            <span class="dot active" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section class="products-section" id="produtos">
+        <div class="container">
+            <h2>Produtos em Destaque</h2>
+            <div class="products-grid">
+                <div class="product-card" onclick="openProductModal(1)">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto 1</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Ácido Hialurônico Premium</h3>
+                        <p class="brand">Marca: DermaTech</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(127)</span>
+                        </div>
+                        <p class="price">R$ 299,90</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProductModal(2)">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto 2</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Toxina Botulínica Tipo A</h3>
+                        <p class="brand">Marca: BioTox</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(89)</span>
+                        </div>
+                        <p class="price">R$ 1.299,90</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProductModal(3)">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto 3</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Agulhas 30G Ultra Finas</h3>
+                        <p class="brand">Marca: MedNeedle</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(203)</span>
+                        </div>
+                        <p class="price">R$ 89,90</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProductModal(4)">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto 4</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Sérum Vitamina C</h3>
+                        <p class="brand">Marca: VitaDerm</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(156)</span>
+                        </div>
+                        <p class="price">R$ 159,90</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-body">
+                <div class="product-details">
+                    <div class="product-image-large">
+                        <div class="placeholder-img-large">Imagem do Produto</div>
+                    </div>
+                    <div class="product-info-detailed">
+                        <h2 id="modalProductName">Nome do Produto</h2>
+                        <p id="modalBrand">Marca: </p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(127 avaliações)</span>
+                        </div>
+                        <p class="price-large" id="modalPrice">R$ 299,90</p>
+                        
+                        <div class="product-variations">
+                            <label>Modelo:</label>
+                            <select>
+                                <option>Modelo A</option>
+                                <option>Modelo B</option>
+                            </select>
+                            
+                            <label>Lote:</label>
+                            <select>
+                                <option>Lote 2024-001</option>
+                                <option>Lote 2024-002</option>
+                            </select>
+                        </div>
+
+                        <div class="shipping-calc">
+                            <input type="text" placeholder="Digite seu CEP" id="cepInput">
+                            <button onclick="calcularFrete()">Calcular Frete</button>
+                            <div id="freteResult"></div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button class="btn-favorite">❤️ Favoritar</button>
+                            <button class="btn-cart">🛒 Adicionar ao Carrinho</button>
+                            <button class="btn-details" onclick="showMoreDetails()">Saber Mais</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Body Map -->
+                <div class="body-map-section">
+                    <h3>Área de Aplicação</h3>
+                    <div class="body-diagram">
+                        <div class="body-silhouette">
+                            <div class="body-part face" title="Rosto"></div>
+                            <div class="body-part neck" title="Pescoço"></div>
+                            <div class="body-part arms" title="Braços"></div>
+                            <div class="body-part torso" title="Tronco"></div>
+                            <div class="body-part legs" title="Pernas"></div>
+                        </div>
+                        <p>Clique nas áreas destacadas para ver onde aplicar</p>
+                    </div>
+                </div>
+
+                <!-- Comments Section -->
+                <div class="comments-section">
+                    <h3>Avaliações e Comentários</h3>
+                    <div class="comment">
+                        <div class="comment-header">
+                            <strong>Dr. Silva</strong>
+                            <span>⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <p>Excelente produto, resultados visíveis em poucos dias.</p>
+                    </div>
+                    <div class="comment">
+                        <div class="comment-header">
+                            <strong>Dra. Santos</strong>
+                            <span>⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <p>Qualidade excepcional, recomendo para todos os colegas.</p>
+                    </div>
+                </div>
+
+                <!-- Related Products -->
+                <div class="related-products">
+                    <h3>Produtos Relacionados</h3>
+                    <div class="related-grid">
+                        <div class="related-item">
+                            <div class="placeholder-img-small">Produto A</div>
+                            <p>Produto Relacionado A</p>
+                            <span>R$ 199,90</span>
+                        </div>
+                        <div class="related-item">
+                            <div class="placeholder-img-small">Produto B</div>
+                            <p>Produto Relacionado B</p>
+                            <span>R$ 249,90</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detailed Info Modal -->
+    <div id="detailsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="detailed-info">
+                <h2>Informações Detalhadas</h2>
+                <div class="info-tabs">
+                    <button class="tab-btn active" onclick="showTab('ingredients')">Ingredientes</button>
+                    <button class="tab-btn" onclick="showTab('usage')">Modo de Uso</button>
+                    <button class="tab-btn" onclick="showTab('specs')">Especificações</button>
+                </div>
+                
+                <div id="ingredients" class="tab-content active">
+                    <h3>Composição</h3>
+                    <ul>
+                        <li>Ácido Hialurônico 2%</li>
+                        <li>Vitamina E</li>
+                        <li>Água Purificada</li>
+                        <li>Conservantes</li>
+                    </ul>
+                </div>
+                
+                <div id="usage" class="tab-content">
+                    <h3>Instruções de Uso</h3>
+                    <p>Aplicar com agulha estéril na derme, respeitando as técnicas de assepsia...</p>
+                </div>
+                
+                <div id="specs" class="tab-content">
+                    <h3>Especificações Técnicas</h3>
+                    <p>Volume: 1ml<br>Concentração: 20mg/ml<br>Validade: 24 meses</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
