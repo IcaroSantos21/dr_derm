@@ -31,6 +31,8 @@ setInterval(() => {
     showSlides(slideIndex);
 }, 5000);
 
+
+
 // Product data
 const products = {
     1: {
@@ -190,30 +192,6 @@ document.addEventListener('click', (e) => {
 // Add to cart functionality
 document.addEventListener('click', (e) => {
     if (e.target.classList.contains('btn-cart')) {
-        // Get current product ID from modal
-        const productName = document.getElementById('modalProductName').textContent;
-        let productId = 1;
-        Object.keys(products).forEach(id => {
-            if (products[id].name === productName) {
-                productId = parseInt(id);
-            }
-        });
-        
-        // Add to cart
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const existingItem = cart.find(item => item.id === productId);
-        
-        if (existingItem) {
-            existingItem.quantity += 1;
-        } else {
-            cart.push({ id: productId, quantity: 1 });
-        }
-        
-        localStorage.setItem('cart', JSON.stringify(cart));
-        
-        // Update cart count
-        updateCartCount();
-        
         const feedback = document.createElement('div');
         feedback.textContent = 'Produto adicionado ao carrinho!';
         feedback.style.cssText = `
@@ -246,65 +224,12 @@ document.addEventListener('click', (e) => {
 
 // Initialize page
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DrDerm - Sistema carregado com sucesso!');
+    console.log('Dr. Derm - Sistema carregado com sucesso!');
     
     // Simulate loading saved CEP
     const savedCep = localStorage.getItem('userCep');
     if (savedCep) {
-        document.getElementById('cepInput')?.value = savedCep;
-    }
-    
-    // Update cart count
-    updateCartCount();
-    
-    // Check login status
-    updateUserStatus();
-});
-
-// Update cart count in header
-function updateCartCount() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-    const cartCountEl = document.getElementById('cartCount');
-    if (cartCountEl) {
-        cartCountEl.textContent = count;
-        cartCountEl.style.display = count > 0 ? 'flex' : 'none';
-    }
-}
-
-// Update user status in header
-function updateUserStatus() {
-    const isLoggedIn = localStorage.getItem('userLoggedIn');
-    const userEmail = localStorage.getItem('userEmail');
-    const dropdown = document.querySelector('.dropdown-menu');
-    
-    if (isLoggedIn && dropdown) {
-        dropdown.innerHTML = `
-            <div style="padding: 0.75rem 1rem; border-bottom: 1px solid #eee; font-size: 0.8rem; color: #666;">
-                ${userEmail}
-            </div>
-            <a href="#">Minha Conta</a>
-            <a href="#">Pedidos</a>
-            <a href="#" onclick="logout()">Sair</a>
-        `;
-    }
-}
-
-// Logout function
-function logout() {
-    localStorage.removeItem('userLoggedIn');
-    localStorage.removeItem('userEmail');
-    alert('Logout realizado com sucesso!');
-    updateUserStatus();
-}
-
-// Smooth scroll to products
-document.addEventListener('click', (e) => {
-    if (e.target.getAttribute('href') === '#produtos') {
-        e.preventDefault();
-        document.getElementById('produtos').scrollIntoView({
-            behavior: 'smooth'
-        });
+        document.getElementById('cepInput').value = savedCep;
     }
 });
 
