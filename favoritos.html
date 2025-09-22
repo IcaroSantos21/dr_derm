@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favoritos - DrDerm</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="header.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <h1>DrDerm</h1>
+                    <span class="tagline">Produtos Dermatológicos</span>
+                </a>
+            </div>
+            <nav class="nav">
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">Início</a>
+                    <a href="produtos.html" class="nav-link">Produtos</a>
+                </div>
+                <div class="search-container">
+                    <input type="text" class="search-bar" placeholder="Buscar produtos...">
+                    <button class="search-btn">🔍</button>
+                </div>
+                <div class="nav-actions">
+                    <a href="favoritos.html" class="nav-icon active" title="Favoritos">
+                        <span class="icon">❤️</span>
+                        <span class="badge" id="favCount">2</span>
+                    </a>
+                    <a href="#" class="nav-icon" title="Carrinho" onclick="toggleCartPopup()">
+                        <span class="icon">🛒</span>
+                        <span class="badge" id="cartCount">0</span>
+                    </a>
+                    <div class="user-menu">
+                        <span class="nav-icon user-toggle" title="Minha Conta">👤</span>
+                        <div class="dropdown-menu">
+                            <a href="login.html">Entrar</a>
+                            <a href="cadastro.html">Cadastrar</a>
+                            <a href="#" onclick="logout()">Sair</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </header>
+
+    <!-- Favorites Page -->
+    <section class="favorites-page">
+        <div class="container">
+            <div class="favorites-header">
+                <h1>Meus Favoritos</h1>
+                <p class="favorites-count">2 produtos salvos</p>
+            </div>
+
+            <div class="favorites-actions">
+                <button class="btn-clear-all" onclick="clearAllFavorites()">Limpar Todos</button>
+                <button class="btn-add-all-cart" onclick="addAllToCart()">Adicionar Todos ao Carrinho</button>
+            </div>
+
+            <div class="favorites-grid">
+                <div class="favorite-item" data-id="1">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <div class="placeholder-img">Produto 1</div>
+                            <button class="remove-favorite" onclick="removeFavorite(1)" title="Remover dos favoritos">
+                                <span>💔</span>
+                            </button>
+                        </div>
+                        <div class="product-info">
+                            <h3>Ácido Hialurônico Premium</h3>
+                            <p class="brand">Marca: DermaTech</p>
+                            <div class="rating">
+                                <span>⭐⭐⭐⭐⭐</span>
+                                <span>(127)</span>
+                            </div>
+                            <p class="price">R$ 299,90</p>
+                            <div class="favorite-actions">
+                                <button class="btn-add-cart" onclick="addToCart(1)">🛒 Adicionar ao Carrinho</button>
+                                <button class="btn-view-details" onclick="openProductModal(1)">Ver Detalhes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="favorite-item" data-id="4">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <div class="placeholder-img">Produto 4</div>
+                            <button class="remove-favorite" onclick="removeFavorite(4)" title="Remover dos favoritos">
+                                <span>💔</span>
+                            </button>
+                        </div>
+                        <div class="product-info">
+                            <h3>Sérum Vitamina C</h3>
+                            <p class="brand">Marca: VitaDerm</p>
+                            <div class="rating">
+                                <span>⭐⭐⭐⭐⭐</span>
+                                <span>(156)</span>
+                            </div>
+                            <p class="price">R$ 159,90</p>
+                            <div class="favorite-actions">
+                                <button class="btn-add-cart" onclick="addToCart(4)">🛒 Adicionar ao Carrinho</button>
+                                <button class="btn-view-details" onclick="openProductModal(4)">Ver Detalhes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-favorites" style="display: none;">
+                <div class="empty-icon">💔</div>
+                <h2>Nenhum produto favoritado</h2>
+                <p>Adicione produtos aos seus favoritos para vê-los aqui</p>
+                <button class="btn-browse-products" onclick="goToProducts()">Explorar Produtos</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Popup -->
+    <div id="cartPopup" class="cart-popup">
+        <div class="cart-popup-content">
+            <div class="cart-header">
+                <h3>Meu Carrinho</h3>
+                <span class="close-cart" onclick="toggleCartPopup()">&times;</span>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <div class="cart-item">
+                    <div class="item-image">
+                        <div class="placeholder-img-mini">P1</div>
+                    </div>
+                    <div class="item-info">
+                        <h4>Ácido Hialurônico Premium</h4>
+                        <p>R$ 299,90</p>
+                        <div class="quantity-controls">
+                            <button onclick="changeQuantity(1, -1)">-</button>
+                            <span>1</span>
+                            <button onclick="changeQuantity(1, 1)">+</button>
+                        </div>
+                    </div>
+                    <button class="remove-item" onclick="removeFromCart(1)">×</button>
+                </div>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <strong>Total: R$ 299,90</strong>
+                </div>
+                <button class="btn-checkout" onclick="goToCheckout()">Finalizar Compra</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function removeFavorite(productId) {
+            if (confirm('Deseja remover este produto dos favoritos?')) {
+                const item = document.querySelector(`[data-id="${productId}"]`);
+                item.style.animation = 'fadeOut 0.3s ease';
+                
+                setTimeout(() => {
+                    item.remove();
+                    updateFavoritesCount();
+                    checkEmptyState();
+                }, 300);
+                
+                showNotification('Produto removido dos favoritos!', 'info');
+            }
+        }
+
+        function addToCart(productId) {
+            showNotification('Produto adicionado ao carrinho!', 'success');
+            // Update cart count
+            const cartCount = document.getElementById('cartCount');
+            cartCount.textContent = parseInt(cartCount.textContent) + 1;
+        }
+
+        function clearAllFavorites() {
+            if (confirm('Deseja remover todos os produtos dos favoritos?')) {
+                const items = document.querySelectorAll('.favorite-item');
+                items.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.style.animation = 'fadeOut 0.3s ease';
+                        setTimeout(() => item.remove(), 300);
+                    }, index * 100);
+                });
+                
+                setTimeout(() => {
+                    updateFavoritesCount();
+                    checkEmptyState();
+                }, items.length * 100 + 300);
+                
+                showNotification('Todos os favoritos foram removidos!', 'info');
+            }
+        }
+
+        function addAllToCart() {
+            const items = document.querySelectorAll('.favorite-item');
+            const cartCount = document.getElementById('cartCount');
+            cartCount.textContent = parseInt(cartCount.textContent) + items.length;
+            
+            showNotification(`${items.length} produtos adicionados ao carrinho!`, 'success');
+        }
+
+        function updateFavoritesCount() {
+            const count = document.querySelectorAll('.favorite-item').length;
+            document.getElementById('favCount').textContent = count;
+            document.querySelector('.favorites-count').textContent = `${count} produtos salvos`;
+        }
+
+        function checkEmptyState() {
+            const hasItems = document.querySelectorAll('.favorite-item').length > 0;
+            document.querySelector('.favorites-grid').style.display = hasItems ? 'grid' : 'none';
+            document.querySelector('.favorites-actions').style.display = hasItems ? 'flex' : 'none';
+            document.querySelector('.empty-favorites').style.display = hasItems ? 'none' : 'block';
+        }
+
+        function goToProducts() {
+            window.location.href = 'produtos.html';
+        }
+
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 1rem 1.5rem;
+                border-radius: 5px;
+                color: white;
+                z-index: 10000;
+                animation: slideIn 0.3s ease;
+                background: ${type === 'success' ? '#28a745' : '#17a2b8'};
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => document.body.removeChild(notification), 300);
+            }, 3000);
+        }
+
+        // Cart functionality
+        function toggleCartPopup() {
+            const popup = document.getElementById('cartPopup');
+            popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+            
+            setTimeout(() => {
+                popup.classList.toggle('active');
+            }, 10);
+        }
+
+        function changeQuantity(itemId, change) {
+            console.log(`Changing quantity for item ${itemId} by ${change}`);
+        }
+
+        function removeFromCart(itemId) {
+            console.log(`Removing item ${itemId} from cart`);
+        }
+
+        function goToCheckout() {
+            window.location.href = 'carrinho.html';
+        }
+
+        // Close cart popup when clicking outside
+        document.addEventListener('click', (e) => {
+            const popup = document.getElementById('cartPopup');
+            const cartIcon = document.querySelector('[title="Carrinho"]');
+            
+            if (popup && popup.classList.contains('active') && 
+                !popup.contains(e.target) && 
+                !cartIcon.contains(e.target)) {
+                toggleCartPopup();
+            }
+        });
+
+        // Add CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeOut {
+                from { opacity: 1; transform: scale(1); }
+                to { opacity: 0; transform: scale(0.8); }
+            }
+            @keyframes slideIn {
+                from { transform: translateX(100%); }
+                to { transform: translateX(0); }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); }
+                to { transform: translateX(100%); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

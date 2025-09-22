@@ -20,19 +20,18 @@
             <nav class="nav">
                 <div class="nav-links">
                     <a href="index.html" class="nav-link active">Início</a>
-                    <a href="#produtos" class="nav-link">Produtos</a>
-                    <a href="#" class="nav-link">Categorias</a>
+                    <a href="produtos.html" class="nav-link">Produtos</a>
                 </div>
                 <div class="search-container">
                     <input type="text" class="search-bar" placeholder="Buscar produtos...">
                     <button class="search-btn">🔍</button>
                 </div>
                 <div class="nav-actions">
-                    <a href="#" class="nav-icon" title="Favoritos">
+                    <a href="favoritos.html" class="nav-icon" title="Favoritos">
                         <span class="icon">❤️</span>
-                        <span class="badge" id="favCount">0</span>
+                        <span class="badge" id="favCount">2</span>
                     </a>
-                    <a href="carrinho.html" class="nav-icon" title="Carrinho">
+                    <a href="#" class="nav-icon" title="Carrinho" onclick="toggleCartPopup()">
                         <span class="icon">🛒</span>
                         <span class="badge" id="cartCount">0</span>
                     </a>
@@ -281,6 +280,152 @@
         </div>
     </section>
 
+    <!-- Single Product Section -->
+    <section id="produto" class="category-section" style="display: none;">
+        <div class="container">
+            <h2>Produto Individual</h2>
+            <div class="single-product-view">
+                <div class="product-card featured-product">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto Destaque</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Ácido Hialurônico Premium</h3>
+                        <p class="brand">Marca: DermaTech</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(127)</span>
+                        </div>
+                        <p class="price">R$ 299,90</p>
+                        <button class="btn-details" onclick="openProductModal(1)">Ver Detalhes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Sections -->
+    <section id="skincare" class="category-section" style="display: none;">
+        <div class="container">
+            <h2>Skincare</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image"><div class="placeholder-img">Skincare 1</div></div>
+                    <div class="product-info">
+                        <h3>Sérum Vitamina C</h3>
+                        <p class="price">R$ 159,90</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="agulhas" class="category-section" style="display: none;">
+        <div class="container">
+            <h2>Agulhas</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image"><div class="placeholder-img">Agulha 1</div></div>
+                    <div class="product-info">
+                        <h3>Agulhas 30G Ultra Finas</h3>
+                        <p class="price">R$ 89,90</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="toxinas" class="category-section" style="display: none;">
+        <div class="container">
+            <h2>Toxinas</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image"><div class="placeholder-img">Toxina 1</div></div>
+                    <div class="product-info">
+                        <h3>Toxina Botulínica Tipo A</h3>
+                        <p class="price">R$ 1.299,90</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="preenchedores" class="category-section" style="display: none;">
+        <div class="container">
+            <h2>Preenchedores</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image"><div class="placeholder-img">Preenchedor 1</div></div>
+                    <div class="product-info">
+                        <h3>Ácido Hialurônico Premium</h3>
+                        <p class="price">R$ 299,90</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="equipamentos" class="category-section" style="display: none;">
+        <div class="container">
+            <h2>Equipamentos</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image"><div class="placeholder-img">Equipamento 1</div></div>
+                    <div class="product-info">
+                        <h3>Laser CO2 Fracionado</h3>
+                        <p class="price">R$ 2.499,90</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cosmeticos" class="category-section" style="display: none;">
+        <div class="container">
+            <h2>Cosméticos</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image"><div class="placeholder-img">Cosmético 1</div></div>
+                    <div class="product-info">
+                        <h3>Peeling Químico TCA</h3>
+                        <p class="price">R$ 189,90</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="lancamentos" class="category-section" style="display: none;">
+        <div class="container">
+            <h2>Lançamentos</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image"><div class="placeholder-img">Novo 1</div><span class="new-badge">NOVO</span></div>
+                    <div class="product-info">
+                        <h3>Bioestimulador Avançado</h3>
+                        <p class="price">R$ 1.199,90</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="promocoes" class="category-section" style="display: none;">
+        <div class="container">
+            <h2>Promoções</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image"><div class="placeholder-img">Promo 1</div><span class="promo-badge">-30%</span></div>
+                    <div class="product-info">
+                        <h3>Kit Completo Facial</h3>
+                        <p class="price"><span class="old-price">R$ 599,90</span> R$ 419,90</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Product Modal -->
     <div id="productModal" class="modal">
         <div class="modal-content">
@@ -298,6 +443,10 @@
                             <span>(127 avaliações)</span>
                         </div>
                         <p class="price-large" id="modalPrice">R$ 299,90</p>
+                        
+                        <div class="product-description-modal">
+                            <p id="modalDescription">Descrição do produto será carregada aqui...</p>
+                        </div>
                         
                         <div class="product-variations">
                             <label>Modelo:</label>
@@ -322,25 +471,12 @@
                         <div class="action-buttons">
                             <button class="btn-favorite">❤️ Favoritar</button>
                             <button class="btn-cart">🛒 Adicionar ao Carrinho</button>
-                            <button class="btn-details" onclick="showMoreDetails()">Saber Mais</button>
+                            <button class="btn-view-more" onclick="viewProductPage()">Ver Mais</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Body Map -->
-                <div class="body-map-section">
-                    <h3>Área de Aplicação</h3>
-                    <div class="body-diagram">
-                        <div class="body-silhouette">
-                            <div class="body-part face" title="Rosto"></div>
-                            <div class="body-part neck" title="Pescoço"></div>
-                            <div class="body-part arms" title="Braços"></div>
-                            <div class="body-part torso" title="Tronco"></div>
-                            <div class="body-part legs" title="Pernas"></div>
-                        </div>
-                        <p>Clique nas áreas destacadas para ver onde aplicar</p>
-                    </div>
-                </div>
+
 
                 <!-- Comments Section -->
                 <div class="comments-section">
@@ -412,6 +548,39 @@
                     <h3>Especificações Técnicas</h3>
                     <p>Volume: 1ml<br>Concentração: 20mg/ml<br>Validade: 24 meses</p>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Popup -->
+    <div id="cartPopup" class="cart-popup">
+        <div class="cart-popup-content">
+            <div class="cart-header">
+                <h3>Meu Carrinho</h3>
+                <span class="close-cart" onclick="toggleCartPopup()">&times;</span>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <div class="cart-item">
+                    <div class="item-image">
+                        <div class="placeholder-img-mini">P1</div>
+                    </div>
+                    <div class="item-info">
+                        <h4>Ácido Hialurônico Premium</h4>
+                        <p>R$ 299,90</p>
+                        <div class="quantity-controls">
+                            <button onclick="changeQuantity(1, -1)">-</button>
+                            <span>1</span>
+                            <button onclick="changeQuantity(1, 1)">+</button>
+                        </div>
+                    </div>
+                    <button class="remove-item" onclick="removeFromCart(1)">×</button>
+                </div>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <strong>Total: R$ 299,90</strong>
+                </div>
+                <button class="btn-checkout" onclick="goToCheckout()">Finalizar Compra</button>
             </div>
         </div>
     </div>

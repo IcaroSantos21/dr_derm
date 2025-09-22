@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Produto - DrDerm</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="header.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <h1>DrDerm</h1>
+                    <span class="tagline">Produtos Dermatológicos</span>
+                </a>
+            </div>
+            <nav class="nav">
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">Início</a>
+                    <a href="produtos.html" class="nav-link">Produtos</a>
+                </div>
+                <div class="search-container">
+                    <input type="text" class="search-bar" placeholder="Buscar produtos...">
+                    <button class="search-btn">🔍</button>
+                </div>
+                <div class="nav-actions">
+                    <a href="favoritos.html" class="nav-icon" title="Favoritos">
+                        <span class="icon">❤️</span>
+                        <span class="badge" id="favCount">2</span>
+                    </a>
+                    <a href="#" class="nav-icon" title="Carrinho" onclick="toggleCartPopup()">
+                        <span class="icon">🛒</span>
+                        <span class="badge" id="cartCount">0</span>
+                    </a>
+                    <div class="user-menu">
+                        <span class="nav-icon user-toggle" title="Minha Conta">👤</span>
+                        <div class="dropdown-menu">
+                            <a href="login.html">Entrar</a>
+                            <a href="cadastro.html">Cadastrar</a>
+                            <a href="#" onclick="logout()">Sair</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </header>
+
+    <!-- Product Page -->
+    <section class="product-page">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="index.html">Início</a> > 
+                <a href="produtos.html">Produtos</a> > 
+                <span id="breadcrumbProduct">Produto</span>
+            </nav>
+
+            <!-- Product Details -->
+            <div class="product-detail-grid">
+                <!-- Product Images -->
+                <div class="product-images">
+                    <div class="main-image">
+                        <div class="placeholder-img-xl" id="mainProductImage">Produto</div>
+                    </div>
+                    <div class="image-thumbnails">
+                        <div class="thumbnail active">
+                            <div class="placeholder-img-thumb">1</div>
+                        </div>
+                        <div class="thumbnail">
+                            <div class="placeholder-img-thumb">2</div>
+                        </div>
+                        <div class="thumbnail">
+                            <div class="placeholder-img-thumb">3</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="product-info-full">
+                    <h1 id="productName">Nome do Produto</h1>
+                    <p class="product-brand" id="productBrand">Marca: </p>
+                    
+                    <div class="rating-section">
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span id="ratingCount">(127 avaliações)</span>
+                        </div>
+                        <a href="#reviews" class="view-reviews">Ver todas as avaliações</a>
+                    </div>
+
+                    <div class="price-section">
+                        <p class="price-current" id="productPrice">R$ 299,90</p>
+                        <p class="price-installments">ou 12x de R$ 24,99 sem juros</p>
+                    </div>
+
+                    <div class="product-description">
+                        <h3>Descrição</h3>
+                        <p id="productDescription">Descrição detalhada do produto será carregada aqui...</p>
+                    </div>
+
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label>Modelo:</label>
+                            <select id="modelSelect">
+                                <option>Modelo A</option>
+                                <option>Modelo B</option>
+                            </select>
+                        </div>
+                        
+                        <div class="option-group">
+                            <label>Lote:</label>
+                            <select id="loteSelect">
+                                <option>Lote 2024-001</option>
+                                <option>Lote 2024-002</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group">
+                            <label>Quantidade:</label>
+                            <div class="quantity-selector">
+                                <button onclick="changeQty(-1)">-</button>
+                                <input type="number" id="quantity" value="1" min="1">
+                                <button onclick="changeQty(1)">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="shipping-calculator">
+                        <h3>Calcular Frete</h3>
+                        <div class="shipping-input">
+                            <input type="text" id="cepInput" placeholder="Digite seu CEP">
+                            <button onclick="calculateShipping()">Calcular</button>
+                        </div>
+                        <div id="shippingResult"></div>
+                    </div>
+
+                    <div class="product-actions">
+                        <button class="btn-add-cart-large" onclick="addToCartFromPage()">
+                            🛒 Adicionar ao Carrinho
+                        </button>
+                        <button class="btn-favorite-large" onclick="toggleFavorite()">
+                            ❤️ Favoritar
+                        </button>
+                        <button class="btn-buy-now" onclick="buyNow()">
+                            Comprar Agora
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Tabs -->
+            <div class="product-tabs">
+                <div class="tab-navigation">
+                    <button class="tab-nav active" onclick="showProductTab('details')">Detalhes</button>
+                    <button class="tab-nav" onclick="showProductTab('ingredients')">Ingredientes</button>
+                    <button class="tab-nav" onclick="showProductTab('usage')">Modo de Uso</button>
+                    <button class="tab-nav" onclick="showProductTab('specs')">Especificações</button>
+                    <button class="tab-nav" onclick="showProductTab('reviews')">Avaliações</button>
+                </div>
+
+                <div class="tab-content-area">
+                    <div id="details" class="tab-pane active">
+                        <h3>Detalhes do Produto</h3>
+                        <p id="detailedDescription">Informações detalhadas sobre o produto...</p>
+                    </div>
+
+                    <div id="ingredients" class="tab-pane">
+                        <h3>Composição</h3>
+                        <ul id="ingredientsList">
+                            <li>Ácido Hialurônico 2%</li>
+                            <li>Vitamina E</li>
+                            <li>Água Purificada</li>
+                            <li>Conservantes</li>
+                        </ul>
+                    </div>
+
+                    <div id="usage" class="tab-pane">
+                        <h3>Instruções de Uso</h3>
+                        <p id="usageInstructions">Aplicar com agulha estéril na derme, respeitando as técnicas de assepsia...</p>
+                    </div>
+
+                    <div id="specs" class="tab-pane">
+                        <h3>Especificações Técnicas</h3>
+                        <div id="specifications">
+                            <p>Volume: 1ml</p>
+                            <p>Concentração: 20mg/ml</p>
+                            <p>Validade: 24 meses</p>
+                        </div>
+                    </div>
+
+                    <div id="reviews" class="tab-pane">
+                        <h3>Avaliações dos Clientes</h3>
+                        <div class="reviews-summary">
+                            <div class="rating-average">
+                                <span class="rating-number">4.8</span>
+                                <div class="stars">⭐⭐⭐⭐⭐</div>
+                                <span class="total-reviews">127 avaliações</span>
+                            </div>
+                        </div>
+                        <div class="reviews-list" id="reviewsList">
+                            <!-- Reviews will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Application Area -->
+            <div class="application-section">
+                <h2>Local de Aplicação</h2>
+                <div class="application-content">
+                    <div class="body-diagram-large">
+                        <div class="body-silhouette-large">
+                            <div class="body-part-large head" id="app-head" title="Cabeça"></div>
+                            <div class="body-part-large neck" id="app-neck" title="Pescoço"></div>
+                            <div class="body-part-large torso" id="app-torso" title="Tronco"></div>
+                            <div class="body-part-large arms" id="app-arms" title="Braços"></div>
+                            <div class="body-part-large legs" id="app-legs" title="Pernas"></div>
+                        </div>
+                    </div>
+                    <div class="application-info">
+                        <h3>Instruções de Aplicação</h3>
+                        <p id="applicationInstructions">Informações de aplicação serão carregadas aqui...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Products -->
+            <div class="related-products-section">
+                <h2>Produtos Relacionados</h2>
+                <div class="related-products-grid" id="relatedProducts">
+                    <!-- Related products will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Popup -->
+    <div id="cartPopup" class="cart-popup">
+        <div class="cart-popup-content">
+            <div class="cart-header">
+                <h3>Meu Carrinho</h3>
+                <span class="close-cart" onclick="toggleCartPopup()">&times;</span>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <div class="cart-item">
+                    <div class="item-image">
+                        <div class="placeholder-img-mini">P1</div>
+                    </div>
+                    <div class="item-info">
+                        <h4>Ácido Hialurônico Premium</h4>
+                        <p>R$ 299,90</p>
+                        <div class="quantity-controls">
+                            <button onclick="changeQuantity(1, -1)">-</button>
+                            <span>1</span>
+                            <button onclick="changeQuantity(1, 1)">+</button>
+                        </div>
+                    </div>
+                    <button class="remove-item" onclick="removeFromCart(1)">×</button>
+                </div>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <strong>Total: R$ 299,90</strong>
+                </div>
+                <button class="btn-checkout" onclick="goToCheckout()">Finalizar Compra</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Product data
+        const productData = {
+            1: {
+                name: "Ácido Hialurônico Premium",
+                brand: "DermaTech",
+                price: "R$ 299,90",
+                rating: 127,
+                description: "Preenchedor facial de alta qualidade para tratamentos estéticos profissionais. Ideal para correção de rugas e aumento de volume.",
+                detailedDescription: "O Ácido Hialurônico Premium da DermaTech é um gel viscoelástico estéril, desenvolvido especialmente para procedimentos de preenchimento facial. Sua fórmula avançada garante resultados naturais e duradouros, com tecnologia de reticulação que proporciona maior longevidade ao tratamento.",
+                ingredients: ["Ácido Hialurônico 20mg/ml", "Fosfato de sódio", "Cloreto de sódio", "Água para injeção"],
+                usage: "Aplicar com agulha estéril de 30G na derme média ou profunda, respeitando as técnicas de assepsia. Massagear suavemente após aplicação para distribuição uniforme.",
+                specs: ["Volume: 1ml", "Concentração: 20mg/ml", "Validade: 24 meses", "Origem: França"],
+                applicationAreas: ["head"],
+                applicationText: "Aplicação facial: rugas, sulcos nasogenianos, aumento de lábios e maçãs do rosto"
+            },
+            2: {
+                name: "Toxina Botulínica Tipo A",
+                brand: "BioTox",
+                price: "R$ 1.299,90",
+                rating: 89,
+                description: "Neurotoxina purificada para tratamento de rugas dinâmicas e hiperidrose.",
+                detailedDescription: "A Toxina Botulínica Tipo A da BioTox é uma proteína purificada que bloqueia temporariamente os sinais nervosos para os músculos, reduzindo rugas de expressão e tratando hiperidrose. Produto de alta pureza com resultados comprovados.",
+                ingredients: ["Toxina Botulínica Tipo A 100U", "Albumina humana", "Cloreto de sódio"],
+                usage: "Reconstituir com soro fisiológico estéril. Aplicar nos pontos motores dos músculos alvo com agulha de insulina. Efeito visível em 3-7 dias.",
+                specs: ["Potência: 100U", "Reconstituição: 2,5ml", "Validade: 36 meses", "Origem: Coreia do Sul"],
+                applicationAreas: ["head", "arms"],
+                applicationText: "Rosto: rugas de expressão (testa, pés de galinha, glabela) | Axilas: tratamento de hiperidrose"
+            },
+            3: {
+                name: "Agulhas 30G Ultra Finas",
+                brand: "MedNeedle",
+                price: "R$ 89,90",
+                rating: 203,
+                description: "Agulhas descartáveis ultra finas para procedimentos estéticos minimamente invasivos.",
+                detailedDescription: "As Agulhas 30G Ultra Finas da MedNeedle são fabricadas com aço inoxidável de alta qualidade, proporcionando máximo conforto ao paciente. Bisel trifacetado para penetração suave e precisa.",
+                ingredients: ["Aço inoxidável cirúrgico", "Revestimento siliconizado"],
+                usage: "Usar uma agulha nova para cada aplicação. Descartar imediatamente após o uso em recipiente apropriado para perfurocortantes.",
+                specs: ["Calibre: 30G", "Comprimento: 13mm", "Embalagem: 100 unidades", "Esterilização: Óxido de etileno"]
+            },
+            4: {
+                name: "Sérum Vitamina C",
+                brand: "VitaDerm",
+                price: "R$ 159,90",
+                rating: 156,
+                description: "Sérum antioxidante com vitamina C estabilizada para rejuvenescimento facial.",
+                detailedDescription: "O Sérum Vitamina C da VitaDerm contém 20% de ácido L-ascórbico estabilizado, proporcionando ação antioxidante potente, clareamento de manchas e estímulo à produção de colágeno. Fórmula de rápida absorção.",
+                ingredients: ["Ácido L-Ascórbico 20%", "Ácido Hialurônico", "Vitamina E", "Água deionizada"],
+                usage: "Aplicar 2-3 gotas no rosto limpo pela manhã. Usar protetor solar durante o tratamento. Evitar contato com os olhos.",
+                specs: ["Volume: 30ml", "Concentração: 20%", "pH: 3.5-4.0", "Validade: 12 meses"],
+                applicationAreas: ["head", "neck"],
+                applicationText: "Aplicação tópica: rosto e pescoço para clareamento de manchas e antienvelhecimento"
+            },
+            5: {
+                name: "Bioestimulador de Colágeno",
+                brand: "CollaGen",
+                price: "R$ 899,90",
+                rating: 94,
+                description: "Bioestimulador injetável para estímulo natural da produção de colágeno.",
+                detailedDescription: "O Bioestimulador de Colágeno CollaGen é composto por microesferas de ácido poli-L-lático que estimulam a produção natural de colágeno, proporcionando rejuvenescimento gradual e natural da pele.",
+                ingredients: ["Ácido Poli-L-Lático", "Carboximetilcelulose", "Manitol"],
+                usage: "Reconstituir com água estéril 24h antes da aplicação. Aplicar em planos profundos com técnica de leque. Massagear após aplicação.",
+                specs: ["Conteúdo: 150mg", "Reconstituição: 5ml", "Sessões: 2-3 aplicações", "Validade: 36 meses"]
+            },
+            6: {
+                name: "Peeling Químico TCA",
+                brand: "ChemPeel",
+                price: "R$ 189,90",
+                rating: 78,
+                description: "Ácido tricloroacético para peeling químico médio, renovação celular e tratamento de manchas.",
+                detailedDescription: "O Peeling Químico TCA da ChemPeel é uma solução de ácido tricloroacético a 35% para tratamento de fotoenvelhecimento, manchas solares e cicatrizes superficiais. Promove renovação celular controlada.",
+                ingredients: ["Ácido Tricloroacético 35%", "Água purificada"],
+                usage: "Aplicar com pincel em camada uniforme sobre pele limpa e desengordurada. Neutralizar conforme protocolo. Usar apenas por profissionais qualificados.",
+                specs: ["Concentração: 35%", "Volume: 30ml", "pH: 0.9-1.2", "Profundidade: Média"]
+            },
+            7: {
+                name: "Microagulhamento Roller",
+                brand: "MicroDerm",
+                price: "R$ 129,90",
+                rating: 145,
+                description: "Roller para microagulhamento facial, estimula produção de colágeno e melhora absorção de ativos.",
+                detailedDescription: "O Microagulhamento Roller MicroDerm possui 540 microagulhas de titânio de 0.5mm, ideal para tratamentos domiciliares e profissionais. Estimula a renovação celular e melhora a textura da pele.",
+                ingredients: ["Agulhas de titânio", "Cabo ergonômico ABS"],
+                usage: "Rolar suavemente sobre a pele limpa em movimentos verticais, horizontais e diagonais. Aplicar sérum após o procedimento. Higienizar antes e após o uso.",
+                specs: ["Agulhas: 540 unidades", "Comprimento: 0.5mm", "Material: Titânio", "Esterilização: Álcool 70%"]
+            },
+            8: {
+                name: "Laser CO2 Fracionado",
+                brand: "LaserTech",
+                price: "R$ 2.499,90",
+                rating: 67,
+                description: "Equipamento de laser CO2 fracionado para rejuvenescimento e tratamento de cicatrizes.",
+                detailedDescription: "O Laser CO2 Fracionado LaserTech oferece tecnologia de ponta para tratamentos de rejuvenescimento facial, cicatrizes de acne e estrias. Sistema de resfriamento integrado para maior conforto do paciente.",
+                ingredients: ["Laser CO2 10.600nm", "Sistema de resfriamento"],
+                usage: "Aplicar anestesia tópica 30 minutos antes. Configurar parâmetros conforme protocolo. Usar óculos de proteção. Aplicar cuidados pós-laser.",
+                specs: ["Potência: 30W", "Modo: Fracionado", "Spot size: 1-10mm", "Garantia: 24 meses"]
+            },
+            9: {
+                name: "Hidroquinona 4%",
+                brand: "DermaChem",
+                price: "R$ 79,90",
+                rating: 189,
+                description: "Creme despigmentante com hidroquinona 4% para tratamento de melasma e manchas solares.",
+                detailedDescription: "A Hidroquinona 4% DermaChem é um agente despigmentante potente que inibe a tirosinase, enzima responsável pela produção de melanina. Eficaz no tratamento de hiperpigmentações.",
+                ingredients: ["Hidroquinona 4%", "Ácido kójico", "Vitamina E", "Base cremosa"],
+                usage: "Aplicar uma fina camada sobre as manchas à noite. Usar protetor solar durante o dia. Tratamento por 8-12 semanas com acompanhamento médico.",
+                specs: ["Concentração: 4%", "Volume: 30g", "pH: 4.0-5.0", "Uso: Noturno"]
+            },
+            10: {
+                name: "Fios de PDO",
+                brand: "ThreadLift",
+                price: "R$ 349,90",
+                rating: 112,
+                description: "Fios de polidioxanona para lifting facial não cirúrgico e bioestimulação.",
+                detailedDescription: "Os Fios de PDO ThreadLift são absorvíveis e promovem lifting imediato com bioestimulação de colágeno a longo prazo. Tecnologia coreana de alta qualidade para resultados naturais.",
+                ingredients: ["Polidioxanona USP", "Agulha guia"],
+                usage: "Inserir com técnica asséptica seguindo vetores de tração. Não massagear por 48h. Evitar movimentos faciais excessivos nas primeiras semanas.",
+                specs: ["Material: PDO", "Absorção: 6-8 meses", "Comprimento: 50mm", "Embalagem: 10 unidades"]
+            },
+            11: {
+                name: "Radiofrequência Facial",
+                brand: "RF-Tech",
+                price: "R$ 1.899,90",
+                rating: 98,
+                description: "Equipamento de radiofrequência monopolar para tratamento de flacidez facial e corporal.",
+                detailedDescription: "A Radiofrequência Facial RF-Tech utiliza energia eletromagnética para aquecimento controlado do tecido, estimulando a produção de colágeno e promovendo o lifting não invasivo.",
+                ingredients: ["Gerador RF 1MHz", "Eletrodos monopolares"],
+                usage: "Aplicar gel condutor. Movimentos circulares contínuos mantendo temperatura entre 40-42°C. Sessões de 20-30 minutos, protocolo de 6-8 sessões.",
+                specs: ["Frequência: 1MHz", "Potência: 150W", "Display: LCD touch", "Garantia: 12 meses"]
+            },
+            12: {
+                name: "Criolipolise Portátil",
+                brand: "CryoSlim",
+                price: "R$ 3.299,90",
+                rating: 76,
+                description: "Equipamento portátil de criolipolise para redução de gordura localizada não invasiva.",
+                detailedDescription: "O CryoSlim oferece tecnologia de criolipolise com resfriamento controlado a -10°C, promovendo apoptose das células adiposas de forma segura e eficaz.",
+                ingredients: ["Sistema de resfriamento", "Aplicadores ergonômicos"],
+                usage: "Posicionar aplicador na área tratada. Sessão de 35 minutos por região. Intervalo mínimo de 60 dias entre sessões na mesma área.",
+                specs: ["Temperatura: -10°C", "Aplicadores: 4 tamanhos", "Timer: 35 min", "Voltagem: 110/220V"],
+                applicationAreas: ["torso", "arms", "legs"],
+                applicationText: "Corpo: abdome, flancos, braços, coxas - redução de gordura localizada não invasiva"
+            },
+            13: {
+                name: "Enzimas Lipolíticas",
+                brand: "EnzymeLipo",
+                price: "R$ 459,90",
+                rating: 134,
+                description: "Solução injetável com enzimas lipolíticas para redução de gordura localizada.",
+                detailedDescription: "As Enzimas Lipolíticas EnzymeLipo contêm fosfatidilcolina e desoxicolato de sódio, promovendo a quebra de gorduras localizadas através da lipólise enzimática.",
+                ingredients: ["Fosfatidilcolina", "Desoxicolato de sódio", "Solução salina"],
+                usage: "Aplicar por via subcutânea com agulha 30G. Sessões quinzenais, máximo 3ml por sessão. Massagear após aplicação.",
+                specs: ["Volume: 10ml", "Concentração: 5%", "pH: 7.0-8.0", "Sessões: 3-6 aplicações"]
+            },
+            14: {
+                name: "Ultrassom Microfocado",
+                brand: "UltraLift",
+                price: "R$ 2.799,90",
+                rating: 89,
+                description: "Equipamento de ultrassom microfocado para lifting facial não invasivo com precisão milimétrica.",
+                detailedDescription: "O UltraLift utiliza tecnologia HIFU (High Intensity Focused Ultrasound) para atingir camadas específicas da pele, promovendo contração imediata e neocolagênese.",
+                ingredients: ["Transdutor HIFU", "Sistema de imagem"],
+                usage: "Aplicar gel acoplante. Disparos sequenciais seguindo protocolo de profundidade. Sessão única com resultados progressivos por 3-6 meses.",
+                specs: ["Frequência: 4MHz", "Profundidade: 1.5-4.5mm", "Disparos: 10.000", "Garantia: 18 meses"]
+            },
+            15: {
+                name: "Mesoterapia Capilar",
+                brand: "HairMeso",
+                price: "R$ 229,90",
+                rating: 167,
+                description: "Solução para mesoterapia capilar com peptídeos e vitaminas para tratamento da alopecia.",
+                detailedDescription: "A Mesoterapia Capilar HairMeso combina peptídeos biomimétricos, vitaminas do complexo B e aminoácidos essenciais para estimular o crescimento capilar e fortalecer os folículos.",
+                ingredients: ["Peptídeos biomimétricos", "Biotina", "Ácido hialurônico", "Vitaminas B"],
+                usage: "Aplicar 0.1ml por ponto na região afetada com agulha 32G. Sessões semanais por 8-12 semanas. Manter couro cabeludo limpo.",
+                specs: ["Volume: 5ml", "pH: 6.5-7.5", "Aplicação: Intradérmica", "Protocolo: 8-12 sessões"]
+            },
+            16: {
+                name: "Plasma Rico em Plaquetas",
+                brand: "PRP-Med",
+                price: "R$ 189,90",
+                rating: 203,
+                description: "Kit para preparo de PRP autólogo para rejuvenescimento facial e capilar.",
+                detailedDescription: "O Kit PRP-Med permite a obtenção de plasma rico em plaquetas do próprio paciente, concentrando fatores de crescimento para regeneração tecidual e rejuvenescimento natural.",
+                ingredients: ["Tubos com anticoagulante", "Gel separador", "Seringas estéreis"],
+                usage: "Coletar 20ml de sangue, centrifugar conforme protocolo. Aplicar PRP obtido na região tratada com microagulhamento ou injeções.",
+                specs: ["Kit: 2 tubos", "Volume: 20ml", "Centrifugação: 3500rpm", "Concentração: 3-5x"]
+            },
+            17: {
+                name: "Carboxiterapia CO2",
+                brand: "CarboxyDerm",
+                price: "R$ 1.599,90",
+                rating: 145,
+                description: "Equipamento de carboxiterapia para infusão subcutânea de CO2 medicinal.",
+                detailedDescription: "O CarboxyDerm realiza infusão controlada de CO2 medicinal, melhorando a microcirculação, oxigenação tecidual e estimulando a produção de colágeno.",
+                ingredients: ["CO2 medicinal", "Sistema de infusão", "Regulador de fluxo"],
+                usage: "Conectar cilindro de CO2. Ajustar fluxo conforme protocolo. Aplicar com agulha 30G em movimentos lineares. Sessões de 15-20 minutos.",
+                specs: ["Fluxo: 50-200ml/min", "Pressão: 15psi", "Display: Digital", "Cilindro: 2kg"]
+            }
+        };
+
+        // Get product ID from URL
+        function getProductId() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id') || '1';
+        }
+
+        // Load product data
+        function loadProduct() {
+            const productId = getProductId();
+            const product = productData[productId];
+            
+            if (product) {
+                document.getElementById('pageTitle').textContent = `${product.name} - DrDerm`;
+                document.getElementById('breadcrumbProduct').textContent = product.name;
+                document.getElementById('mainProductImage').textContent = `Produto ${productId}`;
+                document.getElementById('productName').textContent = product.name;
+                document.getElementById('productBrand').textContent = `Marca: ${product.brand}`;
+                document.getElementById('ratingCount').textContent = `(${product.rating} avaliações)`;
+                document.getElementById('productPrice').textContent = product.price;
+                document.getElementById('productDescription').textContent = product.description;
+                document.getElementById('detailedDescription').textContent = product.detailedDescription;
+                document.getElementById('usageInstructions').textContent = product.usage;
+                
+                // Load ingredients
+                const ingredientsList = document.getElementById('ingredientsList');
+                ingredientsList.innerHTML = product.ingredients.map(ing => `<li>${ing}</li>`).join('');
+                
+                // Load specs
+                const specifications = document.getElementById('specifications');
+                specifications.innerHTML = product.specs.map(spec => `<p>${spec}</p>`).join('');
+                
+                // Load application areas
+                if (product.applicationAreas && product.applicationText) {
+                    // Clear all areas
+                    document.querySelectorAll('.body-part-large').forEach(area => {
+                        area.classList.remove('active');
+                    });
+                    
+                    // Highlight applicable areas
+                    product.applicationAreas.forEach(area => {
+                        const element = document.getElementById(`app-${area}`);
+                        if (element) {
+                            element.classList.add('active');
+                        }
+                    });
+                    
+                    // Update application instructions
+                    const instructions = document.getElementById('applicationInstructions');
+                    if (instructions) {
+                        instructions.textContent = product.applicationText;
+                    }
+                }
+            }
+        }
+
+        // Tab functionality
+        function showProductTab(tabName) {
+            document.querySelectorAll('.tab-nav').forEach(nav => nav.classList.remove('active'));
+            document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        // Quantity controls
+        function changeQty(change) {
+            const input = document.getElementById('quantity');
+            let value = parseInt(input.value) + change;
+            if (value < 1) value = 1;
+            input.value = value;
+        }
+
+        // Cart functionality
+        function toggleCartPopup() {
+            const popup = document.getElementById('cartPopup');
+            popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+            setTimeout(() => popup.classList.toggle('active'), 10);
+        }
+
+        function addToCartFromPage() {
+            const quantity = document.getElementById('quantity').value;
+            alert(`${quantity} produto(s) adicionado(s) ao carrinho!`);
+        }
+
+        function toggleFavorite() {
+            alert('Produto adicionado aos favoritos!');
+        }
+
+        function buyNow() {
+            window.location.href = 'carrinho.html';
+        }
+
+        function calculateShipping() {
+            const cep = document.getElementById('cepInput').value;
+            if (cep.length >= 8) {
+                document.getElementById('shippingResult').innerHTML = `
+                    <div class="shipping-options">
+                        <p>📦 Sedex: R$ 25,90 - 2 dias úteis</p>
+                        <p>🚚 PAC: R$ 15,90 - 5 dias úteis</p>
+                        <p>🚀 Expressa: R$ 35,90 - 1 dia útil</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', loadProduct);
+    </script>
+</body>
+</html>
