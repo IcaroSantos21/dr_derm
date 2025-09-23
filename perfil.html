@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr Derm - Meu Perfil</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #fafafa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background-color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-bottom: 2px solid #395f69;
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            max-width: 200px;
+            object-fit: contain;
+        }
+
+        .profile-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .btn-back-home {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #395f69, #748d8c);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(57, 95, 105, 0.3);
+        }
+
+        .btn-back-home:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(57, 95, 105, 0.4);
+            text-decoration: none;
+            color: white;
+        }
+
+        .btn-cart {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(57, 95, 105, 0.1);
+            color: #395f69;
+            text-decoration: none;
+            border-radius: 50%;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(57, 95, 105, 0.2);
+        }
+
+        .btn-cart:hover {
+            background: #395f69;
+            color: white;
+            transform: scale(1.1);
+            text-decoration: none;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #dcbb92;
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 12px;
+            min-width: 20px;
+            text-align: center;
+            line-height: 1;
+        }
+
+        /* Profile Main */
+        .profile-main {
+            min-height: 100vh;
+            padding: 40px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .profile-header {
+            margin-bottom: 40px;
+        }
+
+        .profile-welcome {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .welcome-avatar {
+            position: relative;
+        }
+
+        .avatar-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 4px solid #395f69;
+            box-shadow: 0 8px 25px rgba(57, 95, 105, 0.3);
+        }
+
+        .status-indicator {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 20px;
+            height: 20px;
+            background: #28a745;
+            border: 3px solid white;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .welcome-info h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1e2723;
+            margin-bottom: 8px;
+        }
+
+        .welcome-info p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 30px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 24px;
+            font-weight: 700;
+            color: #395f69;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .profile-container {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .profile-sidebar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            height: fit-content;
+            overflow: hidden;
+        }
+
+        .profile-nav {
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+        }
+
+        .profile-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 30px;
+            color: #666;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            font-weight: 500;
+            position: relative;
+            border-left: 4px solid transparent;
+        }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-text {
+            flex: 1;
+            font-weight: 600;
+        }
+
+        .nav-arrow {
+            font-size: 12px;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .profile-nav-item:hover {
+            background: linear-gradient(135deg, rgba(57, 95, 105, 0.08), rgba(116, 141, 140, 0.04));
+            color: #395f69;
+            transform: translateX(8px);
+            border-left-color: rgba(57, 95, 105, 0.3);
+        }
+
+        .profile-nav-item:hover .nav-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .profile-nav-item:hover .nav-icon {
+            transform: scale(1.1);
+        }
+
+        .profile-nav-item.active {
+            background: linear-gradient(135deg, #395f69, #748d8c);
+            color: white;
+            border-left-color: #dcbb92;
+            transform: translateX(8px);
+        }
+
+        .profile-nav-item.active .nav-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .profile-nav-item.active .nav-icon {
+            transform: scale(1.1);
+        }
+
+        .profile-nav-item.logout {
+            margin-top: 20px;
+            color: #dc3545;
+        }
+
+        .profile-nav-item.logout:hover {
+            background: #dc3545;
+            color: white;
+        }
+
+        .profile-content {
+            background: transparent;
+            padding: 0;
+        }
+
+        .section-header {
+            margin-bottom: 30px;
+        }
+
+        .section-header h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1e2723;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-header h2 i {
+            color: #395f69;
+        }
+
+        .section-header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .modern-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .modern-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.12);
+        }
+
+        .modern-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #1e2723;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .profile-section {
+            display: none;
+        }
+
+        .profile-section.active {
+            display: block;
+        }
+
+        .profile-form .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .profile-form .form-group {
+            margin-bottom: 30px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .modern-input {
+            background: rgba(248, 249, 250, 0.8);
+            border-radius: 16px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .modern-input:hover {
+            background: rgba(248, 249, 250, 1);
+            border-color: rgba(57, 95, 105, 0.2);
+        }
+
+        .modern-input:focus-within {
+            background: white;
+            border-color: #395f69;
+            box-shadow: 0 0 0 4px rgba(57, 95, 105, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .input-border {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(135deg, #395f69, #dcbb92);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .modern-input:focus-within .input-border {
+            width: 100%;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 15px;
+            color: #999;
+            z-index: 2;
+        }
+
+        .modern-input input {
+            width: 100%;
+            padding: 18px 20px 18px 50px;
+            border: none;
+            background: transparent;
+            font-size: 16px;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .modern-input input::placeholder {
+            color: #999;
+            font-weight: 400;
+        }
+
+        .modern-input input:focus {
+            outline: none;
+        }
+
+        .modern-btn {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, #395f69, #748d8c);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 10px 30px rgba(57, 95, 105, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modern-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(57, 95, 105, 0.4);
+        }
+
+        .btn-text {
+            flex: 1;
+            text-align: center;
+        }
+
+        .btn-icon {
+            width: 24px;
+            height: 24px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .modern-btn:hover .btn-icon {
+            background: rgba(255,255,255,0.3);
+            transform: translateX(4px);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 40px;
+            color: #666;
+        }
+
+        .empty-state i {
+            font-size: 64px;
+            color: #395f69;
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+
+        .empty-state h3 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+        }
+
+        .empty-state p {
+            font-size: 16px;
+            margin-bottom: 25px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+
+        .btn-start-shopping {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #395f69, #748d8c);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(57, 95, 105, 0.3);
+        }
+
+        .btn-start-shopping:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(57, 95, 105, 0.4);
+            text-decoration: none;
+            color: white;
+        }
+
+        .btn-add-address {
+            border: 2px dashed #395f69;
+            background: transparent;
+            color: #395f69;
+            padding: 30px;
+            border-radius: 24px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-direction: column;
+        }
+
+        .btn-add-address:hover {
+            background: #395f69;
+            color: white;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(57, 95, 105, 0.3);
+        }
+
+        .btn-add-address i {
+            font-size: 24px;
+        }
+
+        .security-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .security-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .security-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #395f69, #748d8c);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            box-shadow: 0 8px 25px rgba(57, 95, 105, 0.3);
+        }
+
+        .security-info {
+            flex: 1;
+        }
+
+        .security-info h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e2723;
+            margin-bottom: 5px;
+        }
+
+        .security-info p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .btn-security {
+            padding: 10px 20px;
+            background: transparent;
+            color: #395f69;
+            border: 2px solid #395f69;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .btn-security:hover {
+            background: #395f69;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(57, 95, 105, 0.3);
+        }
+
+        @media (max-width: 1024px) {
+            .profile-container {
+                grid-template-columns: 280px 1fr;
+                gap: 30px;
+            }
+            
+            .profile-welcome {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .profile-stats {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .profile-main {
+                padding: 20px 0;
+            }
+            
+            .profile-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .profile-sidebar {
+                order: 2;
+            }
+            
+            .profile-content {
+                order: 1;
+            }
+            
+            .profile-welcome {
+                padding: 30px 25px;
+            }
+            
+            .welcome-info h1 {
+                font-size: 24px;
+            }
+            
+            .profile-nav {
+                flex-direction: row;
+                overflow-x: auto;
+                padding: 15px 20px;
+                gap: 10px;
+            }
+            
+            .profile-nav-item {
+                white-space: nowrap;
+                min-width: 140px;
+                justify-content: center;
+                padding: 15px 20px;
+                border-left: none;
+                border-bottom: 4px solid transparent;
+            }
+            
+            .profile-nav-item:hover,
+            .profile-nav-item.active {
+                transform: none;
+                border-left: none;
+                border-bottom-color: #395f69;
+            }
+            
+            .nav-arrow {
+                display: none;
+            }
+            
+            .modern-card {
+                padding: 25px 20px;
+            }
+            
+            .profile-form .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            
+            .security-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-actions {
+                gap: 15px;
+            }
+            
+            .btn-back-home {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+            
+            .btn-cart {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .profile-welcome {
+                padding: 25px 20px;
+            }
+            
+            .welcome-info h1 {
+                font-size: 20px;
+            }
+            
+            .profile-stats {
+                gap: 20px;
+            }
+            
+            .stat-number {
+                font-size: 20px;
+            }
+            
+            .modern-card {
+                padding: 20px 15px;
+            }
+            
+            .section-header h2 {
+                font-size: 22px;
+            }
+            
+            .security-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .btn-add-address {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header profile-header-simple">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><img src="images/logo_dr_derm_cropped.png" alt="Dr Derm" class="logo-img"></a>
+            </div>
+            <div class="profile-actions">
+                <a href="index.html" class="btn-back-home">
+                    <i class="fas fa-home"></i> Voltar ao Início
+                </a>
+                <a href="#" class="btn-cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Profile Main -->
+    <main class="profile-main">
+        <div class="container">
+            <div class="profile-header">
+                <div class="profile-welcome">
+                    <div class="welcome-avatar">
+                        <img src="https://via.placeholder.com/80x80/395f69/FFFFFF?text=MS" alt="Avatar" class="avatar-img">
+                        <div class="status-indicator"></div>
+                    </div>
+                    <div class="welcome-info">
+                        <h1 id="welcome-name">Olá! 👋</h1>
+                        <p>Bem-vindo ao seu espaço pessoal</p>
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <span class="stat-number" id="stat-orders">0</span>
+                                <span class="stat-label">Pedidos</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number" id="stat-favorites">0</span>
+                                <span class="stat-label">Favoritos</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number" id="stat-addresses">0</span>
+                                <span class="stat-label">Endereços</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-container">
+                <!-- Sidebar -->
+                <aside class="profile-sidebar">
+                    <nav class="profile-nav">
+                        <a href="#" class="profile-nav-item active" onclick="showSection('dados')">
+                            <div class="nav-icon"><i class="fas fa-user-edit"></i></div>
+                            <span class="nav-text">Meus Dados</span>
+                            <div class="nav-arrow"><i class="fas fa-chevron-right"></i></div>
+                        </a>
+                        <a href="#" class="profile-nav-item" onclick="showSection('pedidos')">
+                            <div class="nav-icon"><i class="fas fa-shopping-bag"></i></div>
+                            <span class="nav-text">Meus Pedidos</span>
+                            <div class="nav-arrow"><i class="fas fa-chevron-right"></i></div>
+                        </a>
+                        <a href="#" class="profile-nav-item" onclick="showSection('enderecos')">
+                            <div class="nav-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <span class="nav-text">Endereços</span>
+                            <div class="nav-arrow"><i class="fas fa-chevron-right"></i></div>
+                        </a>
+                        <a href="#" class="profile-nav-item" onclick="showSection('favoritos')">
+                            <div class="nav-icon"><i class="fas fa-heart"></i></div>
+                            <span class="nav-text">Favoritos</span>
+                            <div class="nav-arrow"><i class="fas fa-chevron-right"></i></div>
+                        </a>
+                        <a href="#" class="profile-nav-item" onclick="showSection('seguranca')">
+                            <div class="nav-icon"><i class="fas fa-shield-alt"></i></div>
+                            <span class="nav-text">Segurança</span>
+                            <div class="nav-arrow"><i class="fas fa-chevron-right"></i></div>
+                        </a>
+                        <a href="#" class="profile-nav-item logout" onclick="logout()">
+                            <div class="nav-icon"><i class="fas fa-sign-out-alt"></i></div>
+                            <span class="nav-text">Sair</span>
+                            <div class="nav-arrow"><i class="fas fa-chevron-right"></i></div>
+                        </a>
+                    </nav>
+                </aside>
+
+                <!-- Content -->
+                <div class="profile-content">
+                    <!-- Meus Dados -->
+                    <section id="dados" class="profile-section active">
+                        <div class="section-header">
+                            <h2><i class="fas fa-user-edit"></i> Informações Pessoais</h2>
+                            <p>Mantenha seus dados sempre atualizados</p>
+                        </div>
+                        <div class="modern-card">
+                            <form class="profile-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="modern-label">Nome</label>
+                                        <div class="input-wrapper modern-input">
+                                            <i class="fas fa-user"></i>
+                                            <input type="text" id="profile-name" placeholder="Seu nome" required>
+                                            <div class="input-border"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="modern-label">Sobrenome</label>
+                                        <div class="input-wrapper modern-input">
+                                            <i class="fas fa-user"></i>
+                                            <input type="text" id="profile-lastname" placeholder="Seu sobrenome" required>
+                                            <div class="input-border"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="modern-label">E-mail</label>
+                                    <div class="input-wrapper modern-input">
+                                        <i class="fas fa-envelope"></i>
+                                        <input type="email" id="profile-email" placeholder="seu@email.com" required>
+                                        <div class="input-border"></div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="modern-label">Telefone</label>
+                                        <div class="input-wrapper modern-input">
+                                            <i class="fas fa-phone"></i>
+                                            <input type="tel" id="profile-phone" placeholder="(11) 99999-9999" required>
+                                            <div class="input-border"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="modern-label">Data de Nascimento</label>
+                                        <div class="input-wrapper modern-input">
+                                            <i class="fas fa-calendar"></i>
+                                            <input type="date" id="profile-birthdate" placeholder="Data de nascimento">
+                                            <div class="input-border"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn-save modern-btn">
+                                    <span class="btn-text">Salvar Alterações</span>
+                                    <span class="btn-icon"><i class="fas fa-check"></i></span>
+                                </button>
+                            </form>
+                        </div>
+                    </section>
+
+                    <!-- Meus Pedidos -->
+                    <section id="pedidos" class="profile-section">
+                        <div class="section-header">
+                            <h2><i class="fas fa-shopping-bag"></i> Histórico de Pedidos</h2>
+                            <p>Acompanhe todos os seus pedidos</p>
+                        </div>
+                        <div class="orders-list" id="orders-list">
+                            <div class="empty-state">
+                                <i class="fas fa-shopping-bag"></i>
+                                <h3>Nenhum pedido encontrado</h3>
+                                <p>Você ainda não fez nenhum pedido. Que tal começar suas compras?</p>
+                                <a href="index.html" class="btn-start-shopping">Começar a Comprar</a>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Endereços -->
+                    <section id="enderecos" class="profile-section">
+                        <div class="section-header">
+                            <h2><i class="fas fa-map-marker-alt"></i> Endereços de Entrega</h2>
+                            <p>Gerencie seus endereços de entrega</p>
+                        </div>
+                        <div class="addresses-list" id="addresses-list">
+                            <div class="empty-state">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <h3>Nenhum endereço cadastrado</h3>
+                                <p>Adicione um endereço para facilitar suas compras</p>
+                            </div>
+                            <button class="btn-add-address modern-card">
+                                <i class="fas fa-plus"></i>
+                                <span>Adicionar Primeiro Endereço</span>
+                            </button>
+                        </div>
+                    </section>
+
+                    <!-- Favoritos -->
+                    <section id="favoritos" class="profile-section">
+                        <div class="section-header">
+                            <h2><i class="fas fa-heart"></i> Produtos Favoritos</h2>
+                            <p>Seus produtos preferidos em um só lugar</p>
+                        </div>
+                        <div class="favorites-grid" id="favorites-grid">
+                            <div class="empty-state">
+                                <i class="fas fa-heart"></i>
+                                <h3>Nenhum produto favorito</h3>
+                                <p>Adicione produtos aos favoritos para encontrá-los facilmente</p>
+                                <a href="index.html" class="btn-start-shopping">Explorar Produtos</a>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Segurança -->
+                    <section id="seguranca" class="profile-section">
+                        <div class="section-header">
+                            <h2><i class="fas fa-shield-alt"></i> Segurança da Conta</h2>
+                            <p>Mantenha sua conta sempre protegida</p>
+                        </div>
+                        <div class="security-cards">
+                            <div class="security-card modern-card">
+                                <div class="security-icon">
+                                    <i class="fas fa-key"></i>
+                                </div>
+                                <div class="security-info">
+                                    <h4>Alterar Senha</h4>
+                                    <p>Última alteração: há 3 meses</p>
+                                </div>
+                                <button class="btn-security">Alterar</button>
+                            </div>
+                            <div class="security-card modern-card">
+                                <div class="security-icon">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <div class="security-info">
+                                    <h4>Autenticação em Duas Etapas</h4>
+                                    <p>Status: Desativada</p>
+                                </div>
+                                <button class="btn-security">Ativar</button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+    <script>
+        // Verificar se está logado
+        function checkLogin() {
+            const isLoggedIn = localStorage.getItem('userLoggedIn');
+            if (!isLoggedIn) {
+                alert('Você precisa fazer login para acessar seu perfil!');
+                window.location.href = 'login.html';
+                return false;
+            }
+            return true;
+        }
+        
+        // Carregar dados do usuário do localStorage
+        function loadUserData() {
+            const userData = {
+                name: localStorage.getItem('userName') || '',
+                lastname: localStorage.getItem('userLastname') || '',
+                email: localStorage.getItem('userEmail') || '',
+                phone: localStorage.getItem('userPhone') || '',
+                birthdate: localStorage.getItem('userBirthdate') || ''
+            };
+            
+            // Atualizar campos do formulário
+            document.getElementById('profile-name').value = userData.name;
+            document.getElementById('profile-lastname').value = userData.lastname;
+            document.getElementById('profile-email').value = userData.email;
+            document.getElementById('profile-phone').value = userData.phone;
+            document.getElementById('profile-birthdate').value = userData.birthdate;
+            
+            // Atualizar nome de boas-vindas
+            const fullName = userData.name && userData.lastname ? 
+                `${userData.name} ${userData.lastname}` : 
+                userData.name || 'Usuário';
+            document.getElementById('welcome-name').textContent = `Olá, ${fullName}! 👋`;
+            
+            // Atualizar avatar com iniciais
+            const initials = (userData.name.charAt(0) + userData.lastname.charAt(0)).toUpperCase() || 'U';
+            const avatarImg = document.querySelector('.avatar-img');
+            avatarImg.src = `https://via.placeholder.com/80x80/395f69/FFFFFF?text=${initials}`;
+        }
+        
+        // Salvar dados do perfil
+        function saveProfileData() {
+            const formData = {
+                name: document.getElementById('profile-name').value,
+                lastname: document.getElementById('profile-lastname').value,
+                email: document.getElementById('profile-email').value,
+                phone: document.getElementById('profile-phone').value,
+                birthdate: document.getElementById('profile-birthdate').value
+            };
+            
+            // Salvar no localStorage
+            localStorage.setItem('userName', formData.name);
+            localStorage.setItem('userLastname', formData.lastname);
+            localStorage.setItem('userEmail', formData.email);
+            localStorage.setItem('userPhone', formData.phone);
+            localStorage.setItem('userBirthdate', formData.birthdate);
+            
+            alert('Dados salvos com sucesso!');
+            loadUserData(); // Recarregar dados
+        }
+        
+        // Verificar login e carregar dados ao carregar a página
+        if (checkLogin()) {
+            loadUserData();
+            
+            // Adicionar evento ao formulário
+            document.querySelector('.profile-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                saveProfileData();
+            });
+        }
+        
+        // Função de logout
+        function logout() {
+            if(confirm('Tem certeza que deseja sair?')) {
+                localStorage.removeItem('userLoggedIn');
+                localStorage.removeItem('userName');
+                localStorage.removeItem('userLastname');
+                localStorage.removeItem('userEmail');
+                localStorage.removeItem('userPhone');
+                localStorage.removeItem('userBirthdate');
+                alert('Logout realizado com sucesso!');
+                window.location.href = 'index.html';
+            }
+        }
+        
+        function showSection(sectionId) {
+            // Remove active class from all sections and nav items
+            document.querySelectorAll('.profile-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.querySelectorAll('.profile-nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Add active class to selected section and nav item
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+
+    </script>
+</body>
+</html>
