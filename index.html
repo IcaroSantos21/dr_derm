@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrDerm - Produtos Dermatológicos Profissionais</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/header.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <h1>DrDerm</h1>
+                    <span class="tagline">Produtos Dermatológicos</span>
+                </a>
+            </div>
+            <nav class="nav">
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link active">Início</a>
+                    <a href="produtos.html" class="nav-link">Produtos</a>
+                </div>
+                <div class="search-container">
+                    <input type="text" class="search-bar" placeholder="Buscar produtos...">
+                    <button class="search-btn">🔍</button>
+                </div>
+                <div class="nav-actions">
+                    <a href="favoritos.html" class="nav-icon" title="Favoritos">
+                        <span class="icon">❤️</span>
+                        <span class="badge" id="favCount">2</span>
+                    </a>
+                    <a href="#" class="nav-icon" title="Carrinho" onclick="toggleCartPopup()">
+                        <span class="icon">🛒</span>
+                        <span class="badge" id="cartCount">0</span>
+                    </a>
+                    <div class="user-menu">
+                        <span class="nav-icon user-toggle" title="Minha Conta">👤</span>
+                        <div class="dropdown-menu">
+                            <a href="login.html">Entrar</a>
+                            <a href="cadastro.html">Cadastrar</a>
+                            <a href="#" onclick="logout()">Sair</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </header>
+
+    <!-- Categories -->
+    <section class="categories">
+        <div class="container">
+            <div class="category-item">Skincare</div>
+            <div class="category-item">Agulhas</div>
+            <div class="category-item">Toxinas</div>
+            <div class="category-item">Preenchedores</div>
+            <div class="category-item">Equipamentos</div>
+            <div class="category-item">Cosméticos</div>
+        </div>
+    </section>
+
+    <!-- Carousel -->
+    <section class="carousel-section">
+        <div class="carousel">
+            <div class="carousel-item active">
+                <div class="promo-content">
+                    <h2>Promoção Especial</h2>
+                    <p>Até 30% OFF em produtos selecionados</p>
+                    <button class="btn-promo">Ver Ofertas</button>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="promo-content">
+                    <h2>Lançamentos</h2>
+                    <p>Novos produtos para sua clínica</p>
+                    <button class="btn-promo">Conferir</button>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="promo-content">
+                    <h2>Frete Grátis</h2>
+                    <p>Em compras acima de R$ 500</p>
+                    <button class="btn-promo">Aproveitar</button>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-dots">
+            <span class="dot active" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+    </section>
+
+    <!-- Products Carousel -->
+    <div id="products-carousel-root"></div>
+
+    <!-- Products Grid -->
+    <section class="products-section" id="produtos">
+        <div class="container">
+            <h2>Todos os Produtos</h2>
+            <div class="products-grid">
+                <div class="product-card" onclick="openProductModal(7)">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto 7</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Microagulhamento Roller</h3>
+                        <p class="brand">Marca: MicroDerm</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(145)</span>
+                        </div>
+                        <p class="price">R$ 129,90</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProductModal(8)">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto 8</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Laser CO2 Fracionado</h3>
+                        <p class="brand">Marca: LaserTech</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(67)</span>
+                        </div>
+                        <p class="price">R$ 2.499,90</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProductModal(9)">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto 9</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Hidroquinona 4%</h3>
+                        <p class="brand">Marca: DermaChem</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(189)</span>
+                        </div>
+                        <p class="price">R$ 79,90</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProductModal(10)">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto 10</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Fios de PDO</h3>
+                        <p class="brand">Marca: ThreadLift</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(112)</span>
+                        </div>
+                        <p class="price">R$ 349,90</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProductModal(11)">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto 11</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Radiofrequência Facial</h3>
+                        <p class="brand">Marca: RF-Tech</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(98)</span>
+                        </div>
+                        <p class="price">R$ 1.899,90</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProductModal(12)">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto 12</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Criolipolise Portátil</h3>
+                        <p class="brand">Marca: CryoSlim</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(76)</span>
+                        </div>
+                        <p class="price">R$ 3.299,90</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProductModal(13)">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto 13</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Enzimas Lipolíticas</h3>
+                        <p class="brand">Marca: EnzymeLipo</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(134)</span>
+                        </div>
+                        <p class="price">R$ 459,90</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProductModal(14)">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto 14</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Ultrassom Microfocado</h3>
+                        <p class="brand">Marca: UltraLift</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(89)</span>
+                        </div>
+                        <p class="price">R$ 2.799,90</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProductModal(15)">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto 15</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Mesoterapia Capilar</h3>
+                        <p class="brand">Marca: HairMeso</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(167)</span>
+                        </div>
+                        <p class="price">R$ 229,90</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProductModal(16)">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto 16</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Plasma Rico em Plaquetas</h3>
+                        <p class="brand">Marca: PRP-Med</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(203)</span>
+                        </div>
+                        <p class="price">R$ 189,90</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProductModal(17)">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto 17</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Carboxiterapia CO2</h3>
+                        <p class="brand">Marca: CarboxyDerm</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(145)</span>
+                        </div>
+                        <p class="price">R$ 1.599,90</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Single Product Section -->
+    <section id="produto" class="category-section" style="display: none;">
+        <div class="container">
+            <h2>Produto Individual</h2>
+            <div class="single-product-view">
+                <div class="product-card featured-product">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto Destaque</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Ácido Hialurônico Premium</h3>
+                        <p class="brand">Marca: DermaTech</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(127)</span>
+                        </div>
+                        <p class="price">R$ 299,90</p>
+                        <button class="btn-details" onclick="openProductModal(1)">Ver Detalhes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Sections -->
+    <section id="skincare" class="category-section" style="display: none;">
+        <div class="container">
+            <h2>Skincare</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image"><div class="placeholder-img">Skincare 1</div></div>
+                    <div class="product-info">
+                        <h3>Sérum Vitamina C</h3>
+                        <p class="price">R$ 159,90</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="agulhas" class="category-section" style="display: none;">
+        <div class="container">
+            <h2>Agulhas</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image"><div class="placeholder-img">Agulha 1</div></div>
+                    <div class="product-info">
+                        <h3>Agulhas 30G Ultra Finas</h3>
+                        <p class="price">R$ 89,90</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="toxinas" class="category-section" style="display: none;">
+        <div class="container">
+            <h2>Toxinas</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image"><div class="placeholder-img">Toxina 1</div></div>
+                    <div class="product-info">
+                        <h3>Toxina Botulínica Tipo A</h3>
+                        <p class="price">R$ 1.299,90</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="preenchedores" class="category-section" style="display: none;">
+        <div class="container">
+            <h2>Preenchedores</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image"><div class="placeholder-img">Preenchedor 1</div></div>
+                    <div class="product-info">
+                        <h3>Ácido Hialurônico Premium</h3>
+                        <p class="price">R$ 299,90</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="equipamentos" class="category-section" style="display: none;">
+        <div class="container">
+            <h2>Equipamentos</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image"><div class="placeholder-img">Equipamento 1</div></div>
+                    <div class="product-info">
+                        <h3>Laser CO2 Fracionado</h3>
+                        <p class="price">R$ 2.499,90</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cosmeticos" class="category-section" style="display: none;">
+        <div class="container">
+            <h2>Cosméticos</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image"><div class="placeholder-img">Cosmético 1</div></div>
+                    <div class="product-info">
+                        <h3>Peeling Químico TCA</h3>
+                        <p class="price">R$ 189,90</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="lancamentos" class="category-section" style="display: none;">
+        <div class="container">
+            <h2>Lançamentos</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image"><div class="placeholder-img">Novo 1</div><span class="new-badge">NOVO</span></div>
+                    <div class="product-info">
+                        <h3>Bioestimulador Avançado</h3>
+                        <p class="price">R$ 1.199,90</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="promocoes" class="category-section" style="display: none;">
+        <div class="container">
+            <h2>Promoções</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image"><div class="placeholder-img">Promo 1</div><span class="promo-badge">-30%</span></div>
+                    <div class="product-info">
+                        <h3>Kit Completo Facial</h3>
+                        <p class="price"><span class="old-price">R$ 599,90</span> R$ 419,90</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-body">
+                <div class="product-details">
+                    <div class="product-image-large">
+                        <div class="placeholder-img-large">Imagem do Produto</div>
+                    </div>
+                    <div class="product-info-detailed">
+                        <h2 id="modalProductName">Nome do Produto</h2>
+                        <p id="modalBrand">Marca: </p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(127 avaliações)</span>
+                        </div>
+                        <p class="price-large" id="modalPrice">R$ 299,90</p>
+                        
+                        <div class="product-description-modal">
+                            <p id="modalDescription">Descrição do produto será carregada aqui...</p>
+                        </div>
+                        
+                        <div class="product-variations">
+                            <label>Modelo:</label>
+                            <select>
+                                <option>Modelo A</option>
+                                <option>Modelo B</option>
+                            </select>
+                            
+                            <label>Lote:</label>
+                            <select>
+                                <option>Lote 2024-001</option>
+                                <option>Lote 2024-002</option>
+                            </select>
+                        </div>
+
+                        <div class="shipping-calc">
+                            <input type="text" placeholder="Digite seu CEP" id="cepInput">
+                            <button onclick="calcularFrete()">Calcular Frete</button>
+                            <div id="freteResult"></div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button class="btn-favorite">❤️ Favoritar</button>
+                            <button class="btn-cart">🛒 Adicionar ao Carrinho</button>
+                            <button class="btn-view-more" onclick="viewProductPage()">Ver Mais</button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- Comments Section -->
+                <div class="comments-section">
+                    <h3>Avaliações e Comentários</h3>
+                    <div class="comment">
+                        <div class="comment-header">
+                            <strong>Dr. Silva</strong>
+                            <span>⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <p>Excelente produto, resultados visíveis em poucos dias.</p>
+                    </div>
+                    <div class="comment">
+                        <div class="comment-header">
+                            <strong>Dra. Santos</strong>
+                            <span>⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <p>Qualidade excepcional, recomendo para todos os colegas.</p>
+                    </div>
+                </div>
+
+                <!-- Related Products -->
+                <div class="related-products">
+                    <h3>Produtos Relacionados</h3>
+                    <div class="related-grid">
+                        <div class="related-item">
+                            <div class="placeholder-img-small">Produto A</div>
+                            <p>Produto Relacionado A</p>
+                            <span>R$ 199,90</span>
+                        </div>
+                        <div class="related-item">
+                            <div class="placeholder-img-small">Produto B</div>
+                            <p>Produto Relacionado B</p>
+                            <span>R$ 249,90</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detailed Info Modal -->
+    <div id="detailsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="detailed-info">
+                <h2>Informações Detalhadas</h2>
+                <div class="info-tabs">
+                    <button class="tab-btn active" onclick="showTab('ingredients')">Ingredientes</button>
+                    <button class="tab-btn" onclick="showTab('usage')">Modo de Uso</button>
+                    <button class="tab-btn" onclick="showTab('specs')">Especificações</button>
+                </div>
+                
+                <div id="ingredients" class="tab-content active">
+                    <h3>Composição</h3>
+                    <ul>
+                        <li>Ácido Hialurônico 2%</li>
+                        <li>Vitamina E</li>
+                        <li>Água Purificada</li>
+                        <li>Conservantes</li>
+                    </ul>
+                </div>
+                
+                <div id="usage" class="tab-content">
+                    <h3>Instruções de Uso</h3>
+                    <p>Aplicar com agulha estéril na derme, respeitando as técnicas de assepsia...</p>
+                </div>
+                
+                <div id="specs" class="tab-content">
+                    <h3>Especificações Técnicas</h3>
+                    <p>Volume: 1ml<br>Concentração: 20mg/ml<br>Validade: 24 meses</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Popup -->
+    <div id="cartPopup" class="cart-popup">
+        <div class="cart-popup-content">
+            <div class="cart-header">
+                <h3>Meu Carrinho</h3>
+                <span class="close-cart" onclick="toggleCartPopup()">&times;</span>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <div class="cart-item">
+                    <div class="item-image">
+                        <div class="placeholder-img-mini">P1</div>
+                    </div>
+                    <div class="item-info">
+                        <h4>Ácido Hialurônico Premium</h4>
+                        <p>R$ 299,90</p>
+                        <div class="quantity-controls">
+                            <button onclick="changeQuantity(1, -1)">-</button>
+                            <span>1</span>
+                            <button onclick="changeQuantity(1, 1)">+</button>
+                        </div>
+                    </div>
+                    <button class="remove-item" onclick="removeFromCart(1)">×</button>
+                </div>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <strong>Total: R$ 299,90</strong>
+                </div>
+                <button class="btn-checkout" onclick="goToCheckout()">Finalizar Compra</button>
+            </div>
+        </div>
+    </div>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const ProductsCarousel = () => {
+            const [currentSlide, setCurrentSlide] = useState(0);
+            
+            const products = [
+                { id: 1, name: 'Ácido Hialurônico Premium', brand: 'DermaTech', price: 'R$ 299,90', rating: 127 },
+                { id: 2, name: 'Toxina Botulínica Tipo A', brand: 'BioTox', price: 'R$ 1.299,90', rating: 89 },
+                { id: 3, name: 'Agulhas 30G Ultra Finas', brand: 'MedNeedle', price: 'R$ 89,90', rating: 203 },
+                { id: 4, name: 'Sérum Vitamina C', brand: 'VitaDerm', price: 'R$ 159,90', rating: 156 },
+                { id: 5, name: 'Bioestimulador de Colágeno', brand: 'CollaGen', price: 'R$ 899,90', rating: 94 },
+                { id: 6, name: 'Peeling Químico TCA', brand: 'ChemPeel', price: 'R$ 189,90', rating: 78 }
+            ];
+
+            useEffect(() => {
+                const interval = setInterval(() => {
+                    setCurrentSlide(prev => prev >= 1 ? 0 : prev + 1);
+                }, 4000);
+                
+                return () => clearInterval(interval);
+            }, []);
+
+            return React.createElement('section', { className: 'products-carousel-section' },
+                React.createElement('div', { className: 'container' },
+                    React.createElement('h2', null, 'Produtos em Destaque'),
+                    React.createElement('div', { className: 'products-carousel' },
+                        React.createElement('div', { 
+                            className: 'products-wrapper',
+                            style: { transform: `translateX(-${currentSlide * 50}%)` }
+                        },
+                            products.map(product => 
+                                React.createElement('div', { key: product.id, className: 'product-card' },
+                                    React.createElement('div', { className: 'product-image' },
+                                        React.createElement('div', { className: 'placeholder-img' }, `Produto ${product.id}`),
+                                        React.createElement('span', { className: 'favorite-btn' }, '❤️')
+                                    ),
+                                    React.createElement('div', { className: 'product-info' },
+                                        React.createElement('h3', null, product.name),
+                                        React.createElement('p', { className: 'brand' }, `Marca: ${product.brand}`),
+                                        React.createElement('div', { className: 'rating' },
+                                            React.createElement('span', null, '⭐⭐⭐⭐⭐'),
+                                            React.createElement('span', null, `(${product.rating})`)
+                                        ),
+                                        React.createElement('p', { className: 'price' }, product.price)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+        };
+
+        ReactDOM.render(React.createElement(ProductsCarousel), document.getElementById('products-carousel-root'));
+    </script>
+    
+    <script src="script.js"></script>
+</body>
+</html>

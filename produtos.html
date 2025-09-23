@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos - DrDerm</title>
+    <link rel="stylesheet" href="css/produtos.css">
+    <link rel="stylesheet" href="css/header.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <h1>DrDerm</h1>
+                    <span class="tagline">Produtos Dermatológicos</span>
+                </a>
+            </div>
+            <nav class="nav">
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">Início</a>
+                    <a href="produtos.html" class="nav-link active">Produtos</a>
+                </div>
+                <div class="search-container">
+                    <input type="text" class="search-bar" placeholder="Buscar produtos...">
+                    <button class="search-btn">🔍</button>
+                </div>
+                <div class="nav-actions">
+                    <a href="favoritos.html" class="nav-icon" title="Favoritos">
+                        <span class="icon">❤️</span>
+                        <span class="badge" id="favCount">2</span>
+                    </a>
+                    <a href="#" class="nav-icon" title="Carrinho" onclick="toggleCartPopup()">
+                        <span class="icon">🛒</span>
+                        <span class="badge" id="cartCount">0</span>
+                    </a>
+                    <div class="user-menu">
+                        <span class="nav-icon user-toggle" title="Minha Conta">👤</span>
+                        <div class="dropdown-menu">
+                            <a href="login.html">Entrar</a>
+                            <a href="cadastro.html">Cadastrar</a>
+                            <a href="#" onclick="logout()">Sair</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </header>
+
+    <!-- Products Page -->
+    <section class="products-page">
+        <div class="container">
+            <h1>Todos os Produtos</h1>
+            <p class="page-description">Explore nosso catálogo completo de produtos dermatológicos profissionais</p>
+            
+            <!-- Filter Bar -->
+            <div class="filter-bar">
+                <select class="filter-select">
+                    <option>Todas as Categorias</option>
+                    <option>Skincare</option>
+                    <option>Agulhas</option>
+                    <option>Toxinas</option>
+                    <option>Preenchedores</option>
+                    <option>Equipamentos</option>
+                    <option>Cosméticos</option>
+                </select>
+                <select class="filter-select">
+                    <option>Ordenar por</option>
+                    <option>Menor Preço</option>
+                    <option>Maior Preço</option>
+                    <option>Mais Vendidos</option>
+                    <option>Lançamentos</option>
+                </select>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid">
+                <div class="product-card" onclick="openProductModal(1)">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto 1</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Ácido Hialurônico Premium</h3>
+                        <p class="brand">Marca: DermaTech</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(127)</span>
+                        </div>
+                        <p class="price">R$ 299,90</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProductModal(2)">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto 2</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Toxina Botulínica Tipo A</h3>
+                        <p class="brand">Marca: BioTox</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(89)</span>
+                        </div>
+                        <p class="price">R$ 1.299,90</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProductModal(3)">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto 3</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Agulhas 30G Ultra Finas</h3>
+                        <p class="brand">Marca: MedNeedle</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(203)</span>
+                        </div>
+                        <p class="price">R$ 89,90</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProductModal(4)">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto 4</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Sérum Vitamina C</h3>
+                        <p class="brand">Marca: VitaDerm</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(156)</span>
+                        </div>
+                        <p class="price">R$ 159,90</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProductModal(5)">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto 5</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Bioestimulador de Colágeno</h3>
+                        <p class="brand">Marca: CollaGen</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(94)</span>
+                        </div>
+                        <p class="price">R$ 899,90</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProductModal(6)">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto 6</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Peeling Químico TCA</h3>
+                        <p class="brand">Marca: ChemPeel</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(78)</span>
+                        </div>
+                        <p class="price">R$ 189,90</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProductModal(7)">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto 7</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Microagulhamento Roller</h3>
+                        <p class="brand">Marca: MicroDerm</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(145)</span>
+                        </div>
+                        <p class="price">R$ 129,90</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProductModal(8)">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto 8</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Laser CO2 Fracionado</h3>
+                        <p class="brand">Marca: LaserTech</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(67)</span>
+                        </div>
+                        <p class="price">R$ 2.499,90</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProductModal(9)">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto 9</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Hidroquinona 4%</h3>
+                        <p class="brand">Marca: DermaChem</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(189)</span>
+                        </div>
+                        <p class="price">R$ 79,90</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProductModal(10)">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto 10</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Fios de PDO</h3>
+                        <p class="brand">Marca: ThreadLift</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(112)</span>
+                        </div>
+                        <p class="price">R$ 349,90</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProductModal(11)">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto 11</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Radiofrequência Facial</h3>
+                        <p class="brand">Marca: RF-Tech</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(98)</span>
+                        </div>
+                        <p class="price">R$ 1.899,90</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProductModal(12)">
+                    <div class="product-image">
+                        <div class="placeholder-img">Produto 12</div>
+                        <span class="favorite-btn">❤️</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Criolipolise Portátil</h3>
+                        <p class="brand">Marca: CryoSlim</p>
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span>
+                            <span>(76)</span>
+                        </div>
+                        <p class="price">R$ 3.299,90</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

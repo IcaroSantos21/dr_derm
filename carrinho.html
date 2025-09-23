@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho - DrDerm</title>
+    <link rel="stylesheet" href="css/carrinho.css">
+    <link rel="stylesheet" href="css/header.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <h1>DrDerm</h1>
+                    <span class="tagline">Produtos Dermatológicos</span>
+                </a>
+            </div>
+            <nav class="nav">
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">Início</a>
+                    <a href="produtos.html" class="nav-link">Produtos</a>
+                </div>
+                <div class="search-container">
+                    <input type="text" class="search-bar" placeholder="Buscar produtos...">
+                    <button class="search-btn">🔍</button>
+                </div>
+                <div class="nav-actions">
+                    <a href="favoritos.html" class="nav-icon" title="Favoritos">
+                        <span class="icon">❤️</span>
+                        <span class="badge" id="favCount">2</span>
+                    </a>
+                    <a href="#" class="nav-icon active" title="Carrinho">
+                        <span class="icon">🛒</span>
+                        <span class="badge" id="cartCount">1</span>
+                    </a>
+                    <div class="user-menu">
+                        <span class="nav-icon user-toggle" title="Minha Conta">👤</span>
+                        <div class="dropdown-menu">
+                            <a href="login.html">Entrar</a>
+                            <a href="cadastro.html">Cadastrar</a>
+                            <a href="#" onclick="logout()">Sair</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </header>
+
+    <!-- Cart Page -->
+    <section class="cart-page">
+        <div class="container">
+            <h1>Meu Carrinho</h1>
+            
+            <div class="cart-content">
+                <!-- Cart Items -->
+                <div class="cart-section">
+                    <h2>Itens no Carrinho</h2>
+                    
+                    <div class="cart-item-full">
+                        <div class="item-image-large">
+                            <div class="placeholder-img">Produto 1</div>
+                        </div>
+                        <div class="item-details">
+                            <h3>Ácido Hialurônico Premium</h3>
+                            <p class="brand">Marca: DermaTech</p>
+                            <p class="item-description">Preenchedor facial de alta qualidade para tratamentos estéticos profissionais.</p>
+                            <div class="item-options">
+                                <label>Modelo: <select><option>Modelo A</option></select></label>
+                                <label>Lote: <select><option>Lote 2024-001</option></select></label>
+                            </div>
+                        </div>
+                        <div class="item-controls">
+                            <div class="quantity-section">
+                                <label>Quantidade:</label>
+                                <div class="quantity-controls-large">
+                                    <button onclick="changeQuantity(1, -1)">-</button>
+                                    <input type="number" value="1" min="1">
+                                    <button onclick="changeQuantity(1, 1)">+</button>
+                                </div>
+                            </div>
+                            <div class="price-section">
+                                <p class="unit-price">Preço unitário: R$ 299,90</p>
+                                <p class="total-price">Total: R$ 299,90</p>
+                            </div>
+                            <button class="remove-btn" onclick="removeItem(1)">Remover</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="order-summary">
+                    <h2>Resumo do Pedido</h2>
+                    
+                    <div class="summary-line">
+                        <span>Subtotal:</span>
+                        <span>R$ 299,90</span>
+                    </div>
+                    
+                    <div class="shipping-section">
+                        <h3>Frete</h3>
+                        <div class="shipping-options">
+                            <label>
+                                <input type="radio" name="shipping" value="sedex" checked>
+                                📦 Sedex - R$ 25,90 (2 dias úteis)
+                            </label>
+                            <label>
+                                <input type="radio" name="shipping" value="pac">
+                                🚚 PAC - R$ 15,90 (5 dias úteis)
+                            </label>
+                            <label>
+                                <input type="radio" name="shipping" value="express">
+                                🚀 Expressa - R$ 35,90 (1 dia útil)
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-line">
+                        <span>Frete:</span>
+                        <span id="shippingCost">R$ 25,90</span>
+                    </div>
+                    
+                    <div class="summary-line total">
+                        <span><strong>Total:</strong></span>
+                        <span><strong>R$ 325,80</strong></span>
+                    </div>
+                    
+                    <div class="checkout-actions">
+                        <button class="btn-continue-shopping" onclick="continueShopping()">Continuar Comprando</button>
+                        <button class="btn-checkout-final" onclick="proceedToPayment()">Finalizar Pedido</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script>
+        function changeQuantity(itemId, change) {
+            const input = document.querySelector('.quantity-controls-large input');
+            let quantity = parseInt(input.value) + change;
+            if (quantity < 1) quantity = 1;
+            input.value = quantity;
+            updateTotals();
+        }
+
+        function removeItem(itemId) {
+            if (confirm('Deseja remover este item do carrinho?')) {
+                alert('Item removido do carrinho!');
+                window.location.href = 'produtos.html';
+            }
+        }
+
+        function updateTotals() {
+            const quantity = parseInt(document.querySelector('.quantity-controls-large input').value);
+            const unitPrice = 299.90;
+            const subtotal = quantity * unitPrice;
+            const shipping = parseFloat(document.getElementById('shippingCost').textContent.replace('R$ ', '').replace(',', '.'));
+            const total = subtotal + shipping;
+            
+            document.querySelector('.total-price').textContent = `Total: R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+            document.querySelector('.summary-line:first-child span:last-child').textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+            document.querySelector('.total strong:last-child').textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+        }
+
+        function continueShopping() {
+            window.location.href = 'produtos.html';
+        }
+
+        function proceedToPayment() {
+            alert('Redirecionando para o pagamento...');
+        }
+
+        // Update shipping cost when option changes
+        document.addEventListener('change', (e) => {
+            if (e.target.name === 'shipping') {
+                const costs = { sedex: 25.90, pac: 15.90, express: 35.90 };
+                const cost = costs[e.target.value];
+                document.getElementById('shippingCost').textContent = `R$ ${cost.toFixed(2).replace('.', ',')}`;
+                updateTotals();
+            }
+        });
+    </script>
+</body>
+</html>

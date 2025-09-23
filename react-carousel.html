@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Derm - Carrossel React</title>
+    <link rel="stylesheet" href="styles.css">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="products-carousel-root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const ProductsCarousel = () => {
+            const [currentSlide, setCurrentSlide] = useState(0);
+            
+            const products = [
+                { id: 1, name: 'Ácido Hialurônico Premium', brand: 'DermaTech', price: 'R$ 299,90', rating: 127 },
+                { id: 2, name: 'Toxina Botulínica Tipo A', brand: 'BioTox', price: 'R$ 1.299,90', rating: 89 },
+                { id: 3, name: 'Agulhas 30G Ultra Finas', brand: 'MedNeedle', price: 'R$ 89,90', rating: 203 },
+                { id: 4, name: 'Sérum Vitamina C', brand: 'VitaDerm', price: 'R$ 159,90', rating: 156 },
+                { id: 5, name: 'Bioestimulador de Colágeno', brand: 'CollaGen', price: 'R$ 899,90', rating: 94 },
+                { id: 6, name: 'Peeling Químico TCA', brand: 'ChemPeel', price: 'R$ 189,90', rating: 78 }
+            ];
+
+            useEffect(() => {
+                const interval = setInterval(() => {
+                    setCurrentSlide(prev => prev >= 1 ? 0 : prev + 1);
+                }, 4000);
+                
+                return () => clearInterval(interval);
+            }, []);
+
+            return React.createElement('section', { className: 'products-carousel-section' },
+                React.createElement('div', { className: 'container' },
+                    React.createElement('h2', null, 'Produtos em Destaque'),
+                    React.createElement('div', { className: 'products-carousel' },
+                        React.createElement('div', { 
+                            className: 'products-wrapper',
+                            style: { transform: `translateX(-${currentSlide * 50}%)` }
+                        },
+                            products.map(product => 
+                                React.createElement('div', { key: product.id, className: 'product-card' },
+                                    React.createElement('div', { className: 'product-image' },
+                                        React.createElement('div', { className: 'placeholder-img' }, `Produto ${product.id}`),
+                                        React.createElement('span', { className: 'favorite-btn' }, '❤️')
+                                    ),
+                                    React.createElement('div', { className: 'product-info' },
+                                        React.createElement('h3', null, product.name),
+                                        React.createElement('p', { className: 'brand' }, `Marca: ${product.brand}`),
+                                        React.createElement('div', { className: 'rating' },
+                                            React.createElement('span', null, '⭐⭐⭐⭐⭐'),
+                                            React.createElement('span', null, `(${product.rating})`)
+                                        ),
+                                        React.createElement('p', { className: 'price' }, product.price)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+        };
+
+        ReactDOM.render(React.createElement(ProductsCarousel), document.getElementById('products-carousel-root'));
+    </script>
+</body>
+</html>

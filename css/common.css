@@ -1,0 +1,43 @@
+/* Common Styles - Elementos compartilhados entre páginas */
+
+/* Reset e Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #1e2723;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Utility Classes */
+.hidden {
+    display: none;
+}
+
+/* Active nav icon */
+.nav-icon.active {
+    background: rgba(220, 187, 146, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .search-bar {
+        width: 100%;
+    }
+}
