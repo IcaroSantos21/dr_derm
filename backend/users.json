@@ -1,0 +1,11 @@
+{
+  "admin@drderm.com": {
+    "name": "Administrador",
+    "lastname": "Dr Derm",
+    "email": "admin@drderm.com",
+    "phone": "(11) 99999-9999",
+    "password": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+    "created_at": "2025-09-25T03:29:54.866490",
+    "user_type": "admin"
+  }
+}

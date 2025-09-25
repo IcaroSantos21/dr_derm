@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dr Derm - Meu Perfil</title>
-<<<<<<< HEAD
     <style>
         * {
             margin: 0;
@@ -753,24 +752,16 @@
             }
         }
     </style>
-=======
-    <link rel="stylesheet" href="css/perfil.css">
->>>>>>> 76c5fb050d7556de9e4500ce4359278f35c51d3d
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Header -->
-<<<<<<< HEAD
-    <header class="header profile-header-simple">
-=======
     <header class="header">
->>>>>>> 76c5fb050d7556de9e4500ce4359278f35c51d3d
         <div class="container">
             <div class="logo">
                 <a href="index.html"><img src="images/logo_dr_derm_cropped.png" alt="Dr Derm" class="logo-img"></a>
             </div>
-<<<<<<< HEAD
             <div class="profile-actions">
                 <a href="index.html" class="btn-back-home">
                     <i class="fas fa-home"></i> Voltar ao Início
@@ -779,21 +770,10 @@
                     <i class="fas fa-shopping-cart"></i>
                     <span class="cart-count">0</span>
                 </a>
-=======
-            <div class="search-bar">
-                <input type="text" id="search-input" placeholder="Buscar produtos de estética..." autocomplete="off">
-                <button type="submit">🔍</button>
-                <div class="search-suggestions" id="search-suggestions"></div>
-            </div>
-            <div class="user-actions">
-                <a href="perfil.html"><i class="fas fa-user"></i> Meu Perfil</a>
-                <a href="#"><i class="fas fa-shopping-cart"></i> Carrinho (0)</a>
->>>>>>> 76c5fb050d7556de9e4500ce4359278f35c51d3d
             </div>
         </div>
     </header>
 
-<<<<<<< HEAD
     <!-- Profile Main -->
     <main class="profile-main">
         <div class="container">
@@ -856,54 +836,6 @@
                             <div class="nav-icon"><i class="fas fa-sign-out-alt"></i></div>
                             <span class="nav-text">Sair</span>
                             <div class="nav-arrow"><i class="fas fa-chevron-right"></i></div>
-=======
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="container">
-            <ul>
-                <li><a href="index.html">Início</a></li>
-                <li><a href="#">Cuidados Faciais</a></li>
-                <li><a href="#">Cuidados Corporais</a></li>
-                <li><a href="#">Protetor Solar</a></li>
-                <li><a href="#">Anti-idade</a></li>
-                <li><a href="#">Acne</a></li>
-                <li><a href="#">Ofertas</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Profile Main -->
-    <main class="profile-main">
-        <div class="container">
-            <div class="profile-container">
-                <!-- Sidebar -->
-                <aside class="profile-sidebar">
-                    <div class="profile-avatar">
-                        <div class="avatar-circle">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <h3>Maria Silva</h3>
-                        <p>Cliente desde 2023</p>
-                    </div>
-                    <nav class="profile-nav">
-                        <a href="#" class="profile-nav-item active" onclick="showSection('dados')">
-                            <i class="fas fa-user-edit"></i> Meus Dados
-                        </a>
-                        <a href="#" class="profile-nav-item" onclick="showSection('pedidos')">
-                            <i class="fas fa-shopping-bag"></i> Meus Pedidos
-                        </a>
-                        <a href="#" class="profile-nav-item" onclick="showSection('enderecos')">
-                            <i class="fas fa-map-marker-alt"></i> Endereços
-                        </a>
-                        <a href="#" class="profile-nav-item" onclick="showSection('favoritos')">
-                            <i class="fas fa-heart"></i> Favoritos
-                        </a>
-                        <a href="#" class="profile-nav-item" onclick="showSection('seguranca')">
-                            <i class="fas fa-shield-alt"></i> Segurança
-                        </a>
-                        <a href="#" class="profile-nav-item logout" onclick="logout()">
-                            <i class="fas fa-sign-out-alt"></i> Sair
->>>>>>> 76c5fb050d7556de9e4500ce4359278f35c51d3d
                         </a>
                     </nav>
                 </aside>
@@ -912,7 +844,6 @@
                 <div class="profile-content">
                     <!-- Meus Dados -->
                     <section id="dados" class="profile-section active">
-<<<<<<< HEAD
                         <div class="section-header">
                             <h2><i class="fas fa-user-edit"></i> Informações Pessoais</h2>
                             <p>Mantenha seus dados sempre atualizados</p>
@@ -969,43 +900,10 @@
                                 </button>
                             </form>
                         </div>
-=======
-                        <h2><i class="fas fa-user-edit"></i> Meus Dados</h2>
-                        <form class="profile-form">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label>Nome</label>
-                                    <input type="text" value="Maria" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Sobrenome</label>
-                                    <input type="text" value="Silva" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>E-mail</label>
-                                <input type="email" value="maria.silva@email.com" required>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label>Telefone</label>
-                                    <input type="tel" value="(11) 99999-9999" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Data de Nascimento</label>
-                                    <input type="date" value="1990-05-15">
-                                </div>
-                            </div>
-                            <button type="submit" class="btn-save">
-                                <i class="fas fa-save"></i> Salvar Alterações
-                            </button>
-                        </form>
->>>>>>> 76c5fb050d7556de9e4500ce4359278f35c51d3d
                     </section>
 
                     <!-- Meus Pedidos -->
                     <section id="pedidos" class="profile-section">
-<<<<<<< HEAD
                         <div class="section-header">
                             <h2><i class="fas fa-shopping-bag"></i> Histórico de Pedidos</h2>
                             <p>Acompanhe todos os seus pedidos</p>
@@ -1016,38 +914,12 @@
                                 <h3>Nenhum pedido encontrado</h3>
                                 <p>Você ainda não fez nenhum pedido. Que tal começar suas compras?</p>
                                 <a href="index.html" class="btn-start-shopping">Começar a Comprar</a>
-=======
-                        <h2><i class="fas fa-shopping-bag"></i> Meus Pedidos</h2>
-                        <div class="orders-list">
-                            <div class="order-card">
-                                <div class="order-header">
-                                    <span class="order-number">#12345</span>
-                                    <span class="order-status delivered">Entregue</span>
-                                </div>
-                                <div class="order-items">
-                                    <p>Serum Vitamina C, Hidratante Facial</p>
-                                    <p class="order-date">Pedido em 15/12/2023</p>
-                                </div>
-                                <div class="order-total">R$ 155,80</div>
-                            </div>
-                            <div class="order-card">
-                                <div class="order-header">
-                                    <span class="order-number">#12344</span>
-                                    <span class="order-status processing">Em Trânsito</span>
-                                </div>
-                                <div class="order-items">
-                                    <p>Kit Anti-Idade Completo</p>
-                                    <p class="order-date">Pedido em 20/12/2023</p>
-                                </div>
-                                <div class="order-total">R$ 149,90</div>
->>>>>>> 76c5fb050d7556de9e4500ce4359278f35c51d3d
                             </div>
                         </div>
                     </section>
 
                     <!-- Endereços -->
                     <section id="enderecos" class="profile-section">
-<<<<<<< HEAD
                         <div class="section-header">
                             <h2><i class="fas fa-map-marker-alt"></i> Endereços de Entrega</h2>
                             <p>Gerencie seus endereços de entrega</p>
@@ -1061,32 +933,12 @@
                             <button class="btn-add-address modern-card">
                                 <i class="fas fa-plus"></i>
                                 <span>Adicionar Primeiro Endereço</span>
-=======
-                        <h2><i class="fas fa-map-marker-alt"></i> Meus Endereços</h2>
-                        <div class="addresses-list">
-                            <div class="address-card">
-                                <div class="address-header">
-                                    <h4>Casa</h4>
-                                    <span class="address-default">Principal</span>
-                                </div>
-                                <p>Rua das Flores, 123<br>
-                                Jardim Primavera - São Paulo/SP<br>
-                                CEP: 01234-567</p>
-                                <div class="address-actions">
-                                    <button class="btn-edit">Editar</button>
-                                    <button class="btn-delete">Excluir</button>
-                                </div>
-                            </div>
-                            <button class="btn-add-address">
-                                <i class="fas fa-plus"></i> Adicionar Endereço
->>>>>>> 76c5fb050d7556de9e4500ce4359278f35c51d3d
                             </button>
                         </div>
                     </section>
 
                     <!-- Favoritos -->
                     <section id="favoritos" class="profile-section">
-<<<<<<< HEAD
                         <div class="section-header">
                             <h2><i class="fas fa-heart"></i> Produtos Favoritos</h2>
                             <p>Seus produtos preferidos em um só lugar</p>
@@ -1097,28 +949,12 @@
                                 <h3>Nenhum produto favorito</h3>
                                 <p>Adicione produtos aos favoritos para encontrá-los facilmente</p>
                                 <a href="index.html" class="btn-start-shopping">Explorar Produtos</a>
-=======
-                        <h2><i class="fas fa-heart"></i> Produtos Favoritos</h2>
-                        <div class="favorites-grid">
-                            <div class="favorite-item">
-                                <img src="https://via.placeholder.com/150x150/1B365D/FFFFFF?text=Serum" alt="Serum">
-                                <h4>Serum Vitamina C</h4>
-                                <p class="price">R$ 89,90</p>
-                                <button class="btn-buy-small">Comprar</button>
-                            </div>
-                            <div class="favorite-item">
-                                <img src="https://via.placeholder.com/150x150/1B365D/FFFFFF?text=Hidratante" alt="Hidratante">
-                                <h4>Hidratante Facial</h4>
-                                <p class="price">R$ 65,90</p>
-                                <button class="btn-buy-small">Comprar</button>
->>>>>>> 76c5fb050d7556de9e4500ce4359278f35c51d3d
                             </div>
                         </div>
                     </section>
 
                     <!-- Segurança -->
                     <section id="seguranca" class="profile-section">
-<<<<<<< HEAD
                         <div class="section-header">
                             <h2><i class="fas fa-shield-alt"></i> Segurança da Conta</h2>
                             <p>Mantenha sua conta sempre protegida</p>
@@ -1145,63 +981,14 @@
                                 <button class="btn-security">Ativar</button>
                             </div>
                         </div>
-=======
-                        <h2><i class="fas fa-shield-alt"></i> Segurança</h2>
-                        <form class="security-form">
-                            <div class="form-group">
-                                <label>Senha Atual</label>
-                                <input type="password" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Nova Senha</label>
-                                <input type="password" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Confirmar Nova Senha</label>
-                                <input type="password" required>
-                            </div>
-                            <button type="submit" class="btn-save">
-                                <i class="fas fa-key"></i> Alterar Senha
-                            </button>
-                        </form>
->>>>>>> 76c5fb050d7556de9e4500ce4359278f35c51d3d
                     </section>
                 </div>
             </div>
         </div>
     </main>
 
-<<<<<<< HEAD
-
-
     <script>
         // Verificar se está logado
-=======
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>Dr Derm</h4>
-                    <p>Sua loja de confiança para produtos de estética</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Atendimento</h4>
-                    <p>Segunda a Sexta: 8h às 18h</p>
-                    <p>Sábado: 8h às 14h</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Contato</h4>
-                    <p>contato@drderm.com.br</p>
-                    <p>(11) 9999-9999</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Verificar se está logado (simulação)
->>>>>>> 76c5fb050d7556de9e4500ce4359278f35c51d3d
         function checkLogin() {
             const isLoggedIn = localStorage.getItem('userLoggedIn');
             if (!isLoggedIn) {
@@ -1212,7 +999,6 @@
             return true;
         }
         
-<<<<<<< HEAD
         // Carregar dados do usuário do localStorage
         function loadUserData() {
             const userData = {
@@ -1242,25 +1028,43 @@
             avatarImg.src = `https://via.placeholder.com/80x80/395f69/FFFFFF?text=${initials}`;
         }
         
-        // Salvar dados do perfil
-        function saveProfileData() {
+        // Salvar dados do perfil via API
+        async function saveProfileData() {
             const formData = {
                 name: document.getElementById('profile-name').value,
                 lastname: document.getElementById('profile-lastname').value,
-                email: document.getElementById('profile-email').value,
                 phone: document.getElementById('profile-phone').value,
                 birthdate: document.getElementById('profile-birthdate').value
             };
             
-            // Salvar no localStorage
-            localStorage.setItem('userName', formData.name);
-            localStorage.setItem('userLastname', formData.lastname);
-            localStorage.setItem('userEmail', formData.email);
-            localStorage.setItem('userPhone', formData.phone);
-            localStorage.setItem('userBirthdate', formData.birthdate);
-            
-            alert('Dados salvos com sucesso!');
-            loadUserData(); // Recarregar dados
+            try {
+                const response = await fetch('http://127.0.0.1:5000/api/profile', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(formData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Atualizar localStorage
+                    localStorage.setItem('userName', data.user.name);
+                    localStorage.setItem('userLastname', data.user.lastname);
+                    localStorage.setItem('userPhone', data.user.phone);
+                    localStorage.setItem('userBirthdate', data.user.birthdate || '');
+                    
+                    alert('Dados salvos com sucesso!');
+                    loadUserData(); // Recarregar dados
+                } else {
+                    alert(data.error || 'Erro ao salvar dados');
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Erro de conexão. Verifique se o servidor está rodando.');
+            }
         }
         
         // Verificar login e carregar dados ao carregar a página
@@ -1272,36 +1076,32 @@
                 e.preventDefault();
                 saveProfileData();
             });
-=======
-        // Verificar login ao carregar a página
-        if (!checkLogin()) {
-            // Página será redirecionada
-        } else {
-            // Carregar nome do usuário
-            const userName = localStorage.getItem('userName') || 'Usuário';
-            document.querySelector('.profile-avatar h3').textContent = userName;
->>>>>>> 76c5fb050d7556de9e4500ce4359278f35c51d3d
         }
         
-        // Função de logout
-        function logout() {
-<<<<<<< HEAD
+        // Função de logout via API
+        async function logout() {
             if(confirm('Tem certeza que deseja sair?')) {
+                try {
+                    await fetch('http://127.0.0.1:5000/api/logout', {
+                        method: 'POST',
+                        credentials: 'include'
+                    });
+                } catch (error) {
+                    console.error('Erro no logout:', error);
+                }
+                
+                // Limpar localStorage
                 localStorage.removeItem('userLoggedIn');
                 localStorage.removeItem('userName');
                 localStorage.removeItem('userLastname');
                 localStorage.removeItem('userEmail');
                 localStorage.removeItem('userPhone');
                 localStorage.removeItem('userBirthdate');
+                localStorage.removeItem('userType');
+                
                 alert('Logout realizado com sucesso!');
                 window.location.href = 'index.html';
             }
-=======
-            localStorage.removeItem('userLoggedIn');
-            localStorage.removeItem('userName');
-            alert('Logout realizado com sucesso!');
-            window.location.href = 'index.html';
->>>>>>> 76c5fb050d7556de9e4500ce4359278f35c51d3d
         }
         
         function showSection(sectionId) {
@@ -1317,61 +1117,6 @@
             document.getElementById(sectionId).classList.add('active');
             event.target.classList.add('active');
         }
-
-<<<<<<< HEAD
-
     </script>
 </body>
 </html>
-=======
-        // Search functionality (same as other pages)
-        const products = [
-            'Serum Vitamina C', 'Hidratante Facial', 'Protetor Solar FPS 60', 'Gel de Limpeza',
-            'Tônico Facial', 'Máscara Facial', 'Esfoliante Facial', 'Água Micelar',
-            'Kit Anti-Idade Completo', 'Combo Tratamento Acne', 'Kit Hidratação Intensiva',
-            'Serum Premium Vitamina C', 'Kit Limpeza Profunda', 'Óleo Facial Nutritivo',
-            'Creme Noturno Reparador', 'Creme Anti-Idade', 'Lotion Corporal', 'Sabonete Facial',
-            'Demaquilante', 'Base Facial', 'Pó Compacto', 'Batom Hidratante'
-        ];
-        
-        const searchInput = document.getElementById('search-input');
-        const searchSuggestions = document.getElementById('search-suggestions');
-        
-        searchInput.addEventListener('input', function() {
-            const query = this.value.toLowerCase().trim();
-            
-            if (query.length === 0) {
-                searchSuggestions.style.display = 'none';
-                return;
-            }
-            
-            const filteredProducts = products.filter(product => 
-                product.toLowerCase().includes(query)
-            ).slice(0, 5);
-            
-            if (filteredProducts.length > 0) {
-                searchSuggestions.innerHTML = filteredProducts
-                    .map(product => `<div class="suggestion-item">${product}</div>`)
-                    .join('');
-                searchSuggestions.style.display = 'block';
-                
-                document.querySelectorAll('.suggestion-item').forEach(item => {
-                    item.addEventListener('click', function() {
-                        searchInput.value = this.textContent;
-                        searchSuggestions.style.display = 'none';
-                    });
-                });
-            } else {
-                searchSuggestions.style.display = 'none';
-            }
-        });
-        
-        document.addEventListener('click', function(e) {
-            if (!searchInput.contains(e.target) && !searchSuggestions.contains(e.target)) {
-                searchSuggestions.style.display = 'none';
-            }
-        });
-    </script>
-</body>
-</html>
->>>>>>> 76c5fb050d7556de9e4500ce4359278f35c51d3d

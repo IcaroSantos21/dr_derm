@@ -1,0 +1,2 @@
+# Nenhuma dependência externa necessária
+# Usando apenas bibliotecas padrão do Python
