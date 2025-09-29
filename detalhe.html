@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr Derm - Detalhes do Produto</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #fafafa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background-color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-bottom: 2px solid #1e40af;
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            max-width: 200px;
+            object-fit: contain;
+        }
+
+        .back-btn {
+            background: #1e40af;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #3b82f6;
+            transform: translateY(-1px);
+        }
+
+        /* Product Detail */
+        .product-detail {
+            padding: 40px 0;
+        }
+
+        .product-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .product-image-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 400px;
+            background: #1e40af;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .usage-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .usage-image {
+            height: 120px;
+            background: #3b82f6;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Body Animation */
+        .body-animation {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, #f8faff, #e8f2ff);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .human-body-svg {
+            width: 250px;
+            height: 450px;
+        }
+
+        .body-area {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.3;
+        }
+
+        .body-area.active {
+            opacity: 1;
+            animation: glow 2s infinite;
+        }
+
+        .body-area:hover {
+            opacity: 0.8;
+            transform: scale(1.05);
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 5px #1e40af); }
+            50% { filter: drop-shadow(0 0 15px #3b82f6); }
+        }
+
+        .benefit-tooltip {
+            position: absolute;
+            background: rgba(30, 64, 175, 0.95);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            max-width: 200px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 100;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .benefit-tooltip.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .body-info {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            font-size: 14px;
+            color: #1e40af;
+            font-weight: 600;
+        }
+
+        .product-info {
+            padding: 20px 0;
+        }
+
+        .product-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 20px;
+        }
+
+        .product-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+
+        .product-description {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .btn-cart {
+            flex: 1;
+            background: transparent;
+            color: #1e40af;
+            border: 2px solid #1e40af;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cart:hover {
+            background: #1e40af;
+            color: white;
+        }
+
+        .btn-buy {
+            flex: 1;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-buy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 64, 175, 0.4);
+        }
+
+        /* Tabs */
+        .product-tabs {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .tab-buttons {
+            display: flex;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            padding: 20px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #666;
+        }
+
+        .tab-btn.active {
+            color: #1e40af;
+            background: #f8faff;
+            border-bottom: 3px solid #1e40af;
+        }
+
+        .tab-content {
+            padding: 30px;
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .tab-content h3 {
+            color: #1e40af;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .tab-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .tab-content li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .tab-content li:before {
+            content: "✓";
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .product-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .product-title {
+                font-size: 24px;
+            }
+            
+            .product-price {
+                font-size: 22px;
+            }
+            
+            .tab-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="exclusivo.html"><img src="images/logo_dr_derm_cropped.png" alt="Dr Derm" class="logo-img"></a>
+            </div>
+            <button class="back-btn" onclick="history.back()">← Voltar</button>
+        </div>
+    </header>
+
+    <!-- Product Detail -->
+    <main class="product-detail">
+        <div class="container">
+            <div class="product-container">
+                <!-- Product Images -->
+                <div class="product-image-section">
+                    <div class="main-image" id="mainImage">
+                        Produto
+                    </div>
+                    <div class="body-animation" id="bodyAnimation">
+                        <svg class="human-body-svg" viewBox="0 0 250 450" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Anatomical Body Base -->
+                            <g id="anatomical-body" fill="#e5e7eb" stroke="#9ca3af" stroke-width="1">
+                                <!-- Head outline -->
+                                <ellipse cx="125" cy="40" rx="25" ry="30"/>
+                                <circle cx="115" cy="35" r="2" fill="#374151"/> <!-- Eye -->
+                                <circle cx="135" cy="35" r="2" fill="#374151"/> <!-- Eye -->
+                                <path d="M 115 45 Q 125 50 135 45" stroke="#374151" fill="none"/> <!-- Mouth -->
+                                
+                                <!-- Neck -->
+                                <rect x="115" y="70" width="20" height="25" rx="10"/>
+                                
+                                <!-- Torso -->
+                                <ellipse cx="125" cy="120" rx="35" ry="25"/> <!-- Chest -->
+                                <ellipse cx="125" cy="180" rx="30" ry="35"/> <!-- Abdomen -->
+                                <ellipse cx="125" cy="220" rx="25" ry="20"/> <!-- Waist -->
+                                
+                                <!-- Arms -->
+                                <ellipse cx="75" cy="130" rx="15" ry="40"/> <!-- Left arm -->
+                                <ellipse cx="175" cy="130" rx="15" ry="40"/> <!-- Right arm -->
+                                <circle cx="65" cy="170" r="8"/> <!-- Left hand -->
+                                <circle cx="185" cy="170" r="8"/> <!-- Right hand -->
+                                
+                                <!-- Pelvis and buttocks -->
+                                <ellipse cx="125" cy="250" rx="28" ry="20"/>
+                                
+                                <!-- Legs -->
+                                <ellipse cx="105" cy="300" rx="18" ry="45"/> <!-- Left thigh -->
+                                <ellipse cx="145" cy="300" rx="18" ry="45"/> <!-- Right thigh -->
+                                <ellipse cx="105" cy="380" rx="12" ry="35"/> <!-- Left leg -->
+                                <ellipse cx="145" cy="380" rx="12" ry="35"/> <!-- Right leg -->
+                                <ellipse cx="105" cy="420" rx="8" ry="12"/> <!-- Left foot -->
+                                <ellipse cx="145" cy="420" rx="8" ry="12"/> <!-- Right foot -->
+                                
+                                <!-- Anatomical details -->
+                                <line x1="125" y1="95" x2="125" y2="145" stroke="#9ca3af" stroke-width="0.5"/> <!-- Spine -->
+                                <line x1="125" y1="145" x2="125" y2="240" stroke="#9ca3af" stroke-width="0.5"/> <!-- Spine -->
+                                <circle cx="110" cy="115" r="3" fill="#f87171" opacity="0.3"/> <!-- Heart -->
+                                <ellipse cx="125" cy="190" rx="15" ry="8" fill="#fbbf24" opacity="0.3"/> <!-- Stomach -->
+                            </g>
+                            
+                            <!-- Interactive Areas (Circles) -->
+                            <g id="interactive-areas">
+                                <circle class="body-area" id="head" cx="125" cy="40" r="20" fill="#1e40af" opacity="0.3" 
+                                    data-area="Rosto" data-benefit="Rejuvenescimento facial, redução de rugas e linhas de expressão" 
+                                    onmouseover="showBenefit(this, event)" onmouseout="hideBenefit()" onclick="highlightArea(this)"/>
+                                
+                                <circle class="body-area" id="neck" cx="125" cy="82" r="12" fill="#1e40af" opacity="0.3" 
+                                    data-area="Pescoço" data-benefit="Redução de papada, firmeza e contorno cervical" 
+                                    onmouseover="showBenefit(this, event)" onmouseout="hideBenefit()" onclick="highlightArea(this)"/>
+                                
+                                <circle class="body-area" id="chest" cx="125" cy="120" r="25" fill="#1e40af" opacity="0.3" 
+                                    data-area="Tórax" data-benefit="Firmeza da pele, melhora da textura e elasticidade" 
+                                    onmouseover="showBenefit(this, event)" onmouseout="hideBenefit()" onclick="highlightArea(this)"/>
+                                
+                                <circle class="body-area" id="left-arm" cx="75" cy="130" r="18" fill="#1e40af" opacity="0.3" 
+                                    data-area="Braço" data-benefit="Redução de flacidez, tonificação muscular" 
+                                    onmouseover="showBenefit(this, event)" onmouseout="hideBenefit()" onclick="highlightArea(this)"/>
+                                <circle class="body-area" id="right-arm" cx="175" cy="130" r="18" fill="#1e40af" opacity="0.3" 
+                                    data-area="Braço" data-benefit="Redução de flacidez, tonificação muscular" 
+                                    onmouseover="showBenefit(this, event)" onmouseout="hideBenefit()" onclick="highlightArea(this)"/>
+                                
+                                <circle class="body-area" id="abdomen" cx="125" cy="180" r="22" fill="#1e40af" opacity="0.3" 
+                                    data-area="Abdômen" data-benefit="Redução de gordura localizada, definição abdominal" 
+                                    onmouseover="showBenefit(this, event)" onmouseout="hideBenefit()" onclick="highlightArea(this)"/>
+                                
+                                <circle class="body-area" id="waist" cx="125" cy="220" r="18" fill="#1e40af" opacity="0.3" 
+                                    data-area="Cintura" data-benefit="Modelagem corporal, redução de medidas" 
+                                    onmouseover="showBenefit(this, event)" onmouseout="hideBenefit()" onclick="highlightArea(this)"/>
+                                
+                                <circle class="body-area" id="buttocks" cx="125" cy="250" r="20" fill="#1e40af" opacity="0.3" 
+                                    data-area="Glúteos" data-benefit="Lifting natural, firmeza e contorno glúteo" 
+                                    onmouseover="showBenefit(this, event)" onmouseout="hideBenefit()" onclick="highlightArea(this)"/>
+                                
+                                <circle class="body-area" id="left-thigh" cx="105" cy="300" r="20" fill="#1e40af" opacity="0.3" 
+                                    data-area="Coxa" data-benefit="Redução de celulite, tonificação e firmeza" 
+                                    onmouseover="showBenefit(this, event)" onmouseout="hideBenefit()" onclick="highlightArea(this)"/>
+                                <circle class="body-area" id="right-thigh" cx="145" cy="300" r="20" fill="#1e40af" opacity="0.3" 
+                                    data-area="Coxa" data-benefit="Redução de celulite, tonificação e firmeza" 
+                                    onmouseover="showBenefit(this, event)" onmouseout="hideBenefit()" onclick="highlightArea(this)"/>
+                                
+                                <circle class="body-area" id="left-leg" cx="105" cy="380" r="15" fill="#1e40af" opacity="0.3" 
+                                    data-area="Perna" data-benefit="Melhora da circulação, redução de incômodo" 
+                                    onmouseover="showBenefit(this, event)" onmouseout="hideBenefit()" onclick="highlightArea(this)"/>
+                                <circle class="body-area" id="right-leg" cx="145" cy="380" r="15" fill="#1e40af" opacity="0.3" 
+                                    data-area="Perna" data-benefit="Melhora da circulação, redução de incômodo" 
+                                    onmouseover="showBenefit(this, event)" onmouseout="hideBenefit()" onclick="highlightArea(this)"/>
+                            </g>
+                        </svg>
+                        
+                        <div class="benefit-tooltip" id="benefitTooltip"></div>
+                        
+                        <div class="body-info" id="bodyInfo">
+                            Passe o mouse sobre os círculos azuis para ver os benefícios. Clique para verificar compatibilidade.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="product-info">
+                    <h1 class="product-title" id="productTitle">Nome do Produto</h1>
+                    <div class="product-price" id="productPrice">R$ 0,00</div>
+                    <span class="product-badge">Pro</span>
+                    
+                    <p class="product-description" id="productDescription">
+                        Descrição detalhada do produto será carregada aqui...
+                    </p>
+
+                    <div class="product-actions">
+                        <button class="btn-cart" onclick="addToCart()">Adicionar ao Carrinho</button>
+                        <button class="btn-buy" onclick="buyNow()">Comprar Agora</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Tabs -->
+            <div class="product-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" onclick="showTab('indications')">Indicações</button>
+                    <button class="tab-btn" onclick="showTab('composition')">Composição</button>
+                    <button class="tab-btn" onclick="showTab('usage')">Modo de Uso</button>
+                    <button class="tab-btn" onclick="showTab('contraindications')">Contraindicações</button>
+                </div>
+
+                <div id="indications" class="tab-content active">
+                    <h3>Indicações</h3>
+                    <ul id="indicationsList">
+                        <li>Carregando informações...</li>
+                    </ul>
+                </div>
+
+                <div id="composition" class="tab-content">
+                    <h3>Composição</h3>
+                    <ul id="compositionList">
+                        <li>Carregando informações...</li>
+                    </ul>
+                </div>
+
+                <div id="usage" class="tab-content">
+                    <h3>Modo de Uso</h3>
+                    <div id="usageInstructions">
+                        <p>Carregando informações...</p>
+                    </div>
+                </div>
+
+                <div id="contraindications" class="tab-content">
+                    <h3>Contraindicações</h3>
+                    <ul id="contraindicationsList">
+                        <li>Carregando informações...</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Product data
+        const products = {
+            'CryoTech Pro': {
+                name: 'CryoTech Pro 4 Aplicadores',
+                price: 'R$ 89.999,90',
+                description: 'Equipamento de criolipolise de última geração com 4 aplicadores simultâneos para tratamento corporal não invasivo. Tecnologia avançada para redução de gordura localizada com segurança e eficácia comprovadas.',
+                indications: [
+                    'Redução de gordura localizada',
+                    'Tratamento de culote',
+                    'Redução de papada',
+                    'Modelagem corporal',
+                    'Tratamento de flancos'
+                ],
+                composition: [
+                    'Sistema de resfriamento controlado',
+                    'Aplicadores de diferentes tamanhos',
+                    'Sensores de temperatura',
+                    'Sistema de vácuo ajustável',
+                    'Interface digital touchscreen'
+                ],
+                usage: 'Posicione o aplicador na área desejada, ajuste a intensidade conforme o protocolo estabelecido. Sessões de 35-60 minutos por área. Intervalo mínimo de 60 dias entre sessões na mesma região.',
+                contraindications: [
+                    'Gravidez e lactação',
+                    'Hérnias na região de tratamento',
+                    'Lesões cutâneas ativas',
+                    'Crioglobulinemia',
+                    'Urticária ao frio'
+                ]
+            },
+            'LipoEnzyme Advanced': {
+                name: 'LipoEnzyme Advanced 10ml',
+                price: 'R$ 1.299,90',
+                description: 'Enzima lipolítica de alta concentração para aplicação intradérmica. Promove a quebra de gordura localizada através de ação enzimática específica, ideal para tratamentos de contorno corporal.',
+                indications: [
+                    'Gordura localizada',
+                    'Celulite fibrótica',
+                    'Lipodistrofia ginoide',
+                    'Contorno corporal',
+                    'Redução de medidas'
+                ],
+                composition: [
+                    'Fosfatidilcolina 5%',
+                    'Desoxicolato de sódio 2.5%',
+                    'Carnitina 2%',
+                    'Cafeína 1%',
+                    'Água para injeção q.s.p.'
+                ],
+                usage: 'Aplicação intradérmica com agulha 30G. Dose de 0.2ml por ponto, distância de 2cm entre aplicações. Sessões quinzenais, máximo 3ml por sessão.',
+                contraindications: [
+                    'Alergia aos componentes',
+                    'Gravidez e amamentação',
+                    'Infecções locais',
+                    'Distúrbios de coagulação',
+                    'Doenças autoimunes'
+                ]
+            },
+            'ThreadLift PDO 3D': {
+                name: 'ThreadLift PDO 3D 100un',
+                price: 'R$ 2.499,90',
+                description: 'Fios de PDO (Polidioxanona) com tecnologia 3D para lifting facial e corporal. Biocompatíveis e absorvíveis, promovem sustentação imediata e estímulo de colágeno a longo prazo.',
+                indications: [
+                    'Flacidez facial',
+                    'Lifting de sobrancelhas',
+                    'Contorno mandibular',
+                    'Pescoço e papada',
+                    'Flacidez corporal'
+                ],
+                composition: [
+                    'Polidioxanona (PDO) USP',
+                    'Agulhas estéreis',
+                    'Embalagem individual',
+                    'Certificação CE',
+                    'Rastreabilidade completa'
+                ],
+                usage: 'Técnica asséptica rigorosa. Inserção subcutânea ou intradérmica conforme protocolo. Tração suave para posicionamento. Corte da extremidade externa.',
+                contraindications: [
+                    'Processos inflamatórios ativos',
+                    'Queloides ou cicatrização anômala',
+                    'Uso de anticoagulantes',
+                    'Gravidez',
+                    'Expectativas irreais'
+                ]
+            },
+            'CO2 Therapy Smart': {
+                name: 'CO2 Therapy Smart System',
+                price: 'R$ 15.999,90',
+                description: 'Sistema inteligente de carboxiterapia com controle digital de fluxo e pressão. Tecnologia de ponta para tratamentos estéticos e terapêuticos com CO2 medicinal.',
+                indications: [
+                    'Celulite e flacidez',
+                    'Estrias e cicatrizes',
+                    'Olheiras e bolsas',
+                    'Rejuvenescimento facial',
+                    'Alopecia androgenética'
+                ],
+                composition: [
+                    'Sistema de injeção controlada',
+                    'Regulador de pressão digital',
+                    'Cilindro de CO2 medicinal',
+                    'Agulhas descartáveis',
+                    'Interface touchscreen'
+                ],
+                usage: 'Aplicação subcutânea com agulha 30G. Fluxo de 50-100ml/min. Profundidade de 2-4mm. Sessões semanais, 8-12 sessões por protocolo.',
+                contraindications: [
+                    'Cardiopatias graves',
+                    'Insuficiência renal',
+                    'Hipertensão não controlada',
+                    'Epilepsia',
+                    'Claustrofobia severa'
+                ]
+            },
+            'CollaGen Pro': {
+                name: 'CollaGen Pro Bioestimulador 5ml',
+                price: 'R$ 1.899,90',
+                description: 'Bioestimulador de colágeno de última geração com ácido poli-L-lático. Promove renovação natural do colágeno, proporcionando rejuvenescimento gradual e duradouro.',
+                indications: [
+                    'Flacidez facial',
+                    'Rugas e linhas de expressão',
+                    'Perda de volume',
+                    'Rejuvenescimento global',
+                    'Melhora da textura da pele'
+                ],
+                composition: [
+                    'Ácido Poli-L-Lático 150mg',
+                    'Manitol',
+                    'Carboximetilcelulose',
+                    'Água estéril para injeção',
+                    'Microesferas biocompatíveis'
+                ],
+                usage: 'Reconstituição com 5ml de água estéril. Repouso de 2 horas. Aplicação intradérmica profunda. Massagem pós-aplicação por 5 minutos.',
+                contraindications: [
+                    'Hipersensibilidade conhecida',
+                    'Processos infecciosos ativos',
+                    'Doenças autoimunes',
+                    'Gravidez e lactação',
+                    'Tendência a queloides'
+                ]
+            },
+            'MicroPen Pro': {
+                name: 'MicroPen Pro Automático',
+                price: 'R$ 3.999,90',
+                description: 'Dispositivo automático de microagulhamento com controle de profundidade e velocidade. Tecnologia avançada para tratamentos de rejuvenescimento e indução de colágeno.',
+                indications: [
+                    'Cicatrizes de acne',
+                    'Estrias e queloides',
+                    'Melasma e hiperpigmentação',
+                    'Rejuvenescimento facial',
+                    'Alopecia e calvície'
+                ],
+                composition: [
+                    'Motor de alta precisão',
+                    'Agulhas de titânio estéreis',
+                    'Controle digital de profundidade',
+                    'Sistema de vibração ajustável',
+                    'Cartuchos descartáveis'
+                ],
+                usage: 'Limpeza e antissepsia da pele. Ajuste da profundidade (0.5-2.5mm). Movimentos cruzados uniformes. Aplicação de ativos pós-procedimento.',
+                contraindications: [
+                    'Lesões ativas na pele',
+                    'Uso de isotretinoína',
+                    'Distúrbios de coagulação',
+                    'Queloides ativos',
+                    'Infecções virais ativas'
+                ]
+            }
+        };
+
+        // Get product from URL parameter
+        function getProductFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('produto');
+        }
+
+        // Body animation areas for each product
+        const productAreas = {
+            'CryoTech Pro': ['abdomen', 'waist', 'left-thigh', 'right-thigh', 'buttocks', 'left-arm', 'right-arm'],
+            'LipoEnzyme Advanced': ['abdomen', 'waist', 'left-thigh', 'right-thigh', 'buttocks'],
+            'ThreadLift PDO 3D': ['head', 'neck', 'chest'],
+            'CO2 Therapy Smart': ['head', 'neck', 'chest', 'abdomen', 'left-thigh', 'right-thigh'],
+            'CollaGen Pro': ['head', 'neck', 'chest'],
+            'MicroPen Pro': ['head', 'neck', 'chest', 'left-arm', 'right-arm']
+        };
+
+        // Show benefit tooltip
+        function showBenefit(element, event) {
+            const tooltip = document.getElementById('benefitTooltip');
+            const area = element.getAttribute('data-area');
+            const benefit = element.getAttribute('data-benefit');
+            
+            tooltip.innerHTML = `<strong>${area}</strong><br>${benefit}`;
+            tooltip.style.left = (event.clientX - tooltip.offsetWidth / 2) + 'px';
+            tooltip.style.top = (event.clientY - 60) + 'px';
+            tooltip.classList.add('show');
+        }
+
+        // Hide benefit tooltip
+        function hideBenefit() {
+            document.getElementById('benefitTooltip').classList.remove('show');
+        }
+
+        // Highlight body area
+        function highlightArea(element) {
+            const area = element.getAttribute('data-area');
+            const productName = getProductFromURL();
+            const validAreas = productAreas[productName] || [];
+            const elementId = element.id;
+            
+            if (validAreas.includes(elementId)) {
+                document.getElementById('bodyInfo').innerHTML = `✓ <strong>${area}</strong> - Área indicada para ${productName}`;
+                element.setAttribute('fill', '#10b981');
+                element.setAttribute('opacity', '0.8');
+                element.style.filter = 'drop-shadow(0 0 10px #10b981)';
+            } else {
+                document.getElementById('bodyInfo').innerHTML = `✗ <strong>${area}</strong> - Área não recomendada para este produto`;
+                element.setAttribute('fill', '#ef4444');
+                element.setAttribute('opacity', '0.8');
+                element.style.filter = 'drop-shadow(0 0 10px #ef4444)';
+            }
+            
+            setTimeout(() => {
+                element.setAttribute('fill', '#1e40af');
+                element.setAttribute('opacity', '0.3');
+                element.style.filter = '';
+                document.getElementById('bodyInfo').textContent = 'Passe o mouse sobre os círculos azuis para ver os benefícios. Clique para verificar compatibilidade.';
+            }, 3000);
+        }
+
+        // Auto-highlight valid areas
+        function showValidAreas() {
+            const productName = getProductFromURL();
+            const validAreas = productAreas[productName] || [];
+            
+            document.querySelectorAll('.body-area').forEach(area => {
+                if (validAreas.includes(area.id)) {
+                    area.classList.add('active');
+                    area.setAttribute('fill', '#3b82f6');
+                    area.setAttribute('opacity', '0.6');
+                }
+            });
+        }
+
+        // Load product data
+        function loadProduct() {
+            const productName = getProductFromURL();
+            const product = products[productName];
+            
+            if (product) {
+                document.getElementById('productTitle').textContent = product.name;
+                document.getElementById('productPrice').textContent = product.price;
+                document.getElementById('productDescription').textContent = product.description;
+                document.getElementById('mainImage').textContent = productName;
+                
+                // Load indications
+                const indicationsList = document.getElementById('indicationsList');
+                indicationsList.innerHTML = product.indications.map(item => `<li>${item}</li>`).join('');
+                
+                // Load composition
+                const compositionList = document.getElementById('compositionList');
+                compositionList.innerHTML = product.composition.map(item => `<li>${item}</li>`).join('');
+                
+                // Load usage
+                document.getElementById('usageInstructions').innerHTML = `<p>${product.usage}</p>`;
+                
+                // Load contraindications
+                const contraindicationsList = document.getElementById('contraindicationsList');
+                contraindicationsList.innerHTML = product.contraindications.map(item => `<li>${item}</li>`).join('');
+            } else {
+                document.getElementById('productTitle').textContent = 'Produto não encontrado';
+                document.getElementById('productPrice').textContent = 'R$ 0,00';
+                document.getElementById('productDescription').textContent = 'Produto não encontrado ou URL inválida.';
+            }
+        }
+
+        // Tab functionality
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Cart functions
+        function addToCart() {
+            const productName = getProductFromURL();
+            alert(`${productName} adicionado ao carrinho!`);
+        }
+
+        function buyNow() {
+            const productName = getProductFromURL();
+            alert(`Redirecionando para checkout: ${productName}`);
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProduct();
+            setTimeout(showValidAreas, 1000);
+        });
+    </script>
+</body>
+</html>

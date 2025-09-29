@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dr Derm - Dashboard Administrativo</title>
-<<<<<<< HEAD
     <style>
         * {
             margin: 0;
@@ -75,107 +74,76 @@
             gap: 20px;
         }
 
-        .search-box {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
 
-        .search-box i {
-            position: absolute;
-            left: 12px;
-            color: #94a3b8;
-            font-size: 14px;
-        }
-
-        .search-box input {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 10px 16px 10px 40px;
-            width: 300px;
-            font-size: 14px;
-            transition: all 0.2s;
-        }
-
-        .search-box input:focus {
-            outline: none;
-            border-color: #1B365D;
-            box-shadow: 0 0 0 3px rgba(27, 54, 93, 0.1);
-        }
 
         .notification-btn {
             position: relative;
-            background: none;
-            border: none;
-            font-size: 18px;
-            color: #64748b;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 2px solid rgba(59, 130, 246, 0.1);
+            font-size: 20px;
+            color: #3b82f6;
             cursor: pointer;
-            padding: 12px;
-            border-radius: 12px;
-            transition: all 0.2s;
+            padding: 14px;
+            border-radius: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+            backdrop-filter: blur(10px);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .notification-btn:hover {
-            background: #f1f5f9;
-            color: #1B365D;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .notification-btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .notification-btn i {
+            transition: all 0.3s ease;
+        }
+
+        .notification-btn:hover i {
+            animation: bellRing 0.6s ease-in-out;
+        }
+
+        @keyframes bellRing {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
         }
 
         .notification-badge {
             position: absolute;
-            top: 8px;
-            right: 8px;
-            background: #ef4444;
+            top: -2px;
+            right: -2px;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
             color: white;
-            font-size: 10px;
-            font-weight: 600;
-            padding: 2px 6px;
-            border-radius: 10px;
-            min-width: 18px;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 7px;
+            border-radius: 12px;
+            min-width: 22px;
             text-align: center;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+            border: 2px solid white;
+            animation: pulse 2s infinite;
         }
 
-        .admin-profile {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 8px 12px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.2s;
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
-        .admin-profile:hover {
-            background: #f8fafc;
-        }
 
-        .admin-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #1B365D, #2A4A6B);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .admin-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .admin-name {
-            font-weight: 600;
-            color: #1e293b;
-            font-size: 14px;
-        }
-
-        .admin-role {
-            font-size: 12px;
-            color: #64748b;
-        }
 
         /* Sidebar */
         .modern-sidebar {
@@ -363,6 +331,124 @@
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 24px;
             margin-bottom: 40px;
+        }
+
+        .stat-card-modern {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid #f1f5f9;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card-modern:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        .stat-card-modern.revenue:hover {
+            border-color: #22c55e;
+            box-shadow: 0 12px 40px rgba(34, 197, 94, 0.2);
+        }
+
+        .stat-card-modern.orders:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.2);
+        }
+
+        .stat-card-modern.customers:hover {
+            border-color: #8b5cf6;
+            box-shadow: 0 12px 40px rgba(139, 92, 246, 0.2);
+        }
+
+        .stat-card-modern.stock:hover {
+            border-color: #f59e0b;
+            box-shadow: 0 12px 40px rgba(245, 158, 11, 0.2);
+        }
+
+        .card-icon-modern {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .revenue .card-icon-modern {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+        }
+
+        .orders .card-icon-modern {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+        }
+
+        .customers .card-icon-modern {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        }
+
+        .stock .card-icon-modern {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+
+        .card-content-modern {
+            flex: 1;
+        }
+
+        .card-content-modern h3 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 4px;
+            line-height: 1;
+        }
+
+        .card-content-modern p {
+            color: #64748b;
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .trend {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .trend.positive {
+            color: #22c55e;
+        }
+
+        .trend.warning {
+            color: #f59e0b;
+        }
+
+        .trend i {
+            font-size: 12px;
+        }
+
+        .card-arrow {
+            color: #94a3b8;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card-modern:hover .card-arrow {
+            color: #1e293b;
+            transform: translateX(4px);
         }
 
         .stat-card {
@@ -667,6 +753,45 @@
             color: #155724;
         }
 
+        .btn-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #64748b;
+        }
+
+        .btn-icon:hover {
+            background: #f8fafc;
+            border-color: #1B365D;
+            color: #1B365D;
+        }
+
+        .btn-icon.danger:hover {
+            background: #fef2f2;
+            border-color: #ef4444;
+            color: #ef4444;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-badge.active {
+            background: #d4edda;
+            color: #155724;
+        }
+
         /* Orders */
         .orders-grid {
             padding: 24px;
@@ -765,15 +890,15 @@
             gap: 8px;
         }
 
-        /* Financial */
-        .financial-overview {
+        /* Sales & Revenue */
+        .sales-overview {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 24px;
             margin-bottom: 32px;
         }
 
-        .financial-card {
+        .sales-card {
             background: white;
             padding: 24px;
             border-radius: 16px;
@@ -781,33 +906,46 @@
             display: flex;
             align-items: center;
             gap: 16px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
         }
 
-        .financial-card .card-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
+        .sales-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .sales-card .card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 24px;
             color: white;
+            flex-shrink: 0;
         }
 
-        .financial-card.revenue .card-icon {
+        .sales-card.total-sales .card-icon {
             background: linear-gradient(135deg, #22c55e, #16a34a);
         }
 
-        .financial-card.expenses .card-icon {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-        }
-
-        .financial-card.profit .card-icon {
+        .sales-card.orders-count .card-icon {
             background: linear-gradient(135deg, #3b82f6, #2563eb);
         }
 
+        .sales-card.avg-ticket .card-icon {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        }
+
+        .card-content {
+            flex: 1;
+        }
+
         .card-content h3 {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 700;
             color: #1e293b;
             margin-bottom: 4px;
@@ -816,18 +954,97 @@
         .card-content p {
             color: #64748b;
             margin-bottom: 4px;
+            font-weight: 500;
         }
 
         .period {
             font-size: 12px;
             color: #94a3b8;
+            font-weight: 500;
         }
 
-        .transactions-list {
+        .card-trend {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 12px;
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+        }
+
+        .sales-list {
             padding: 24px;
         }
 
-        .transaction-item {
+        .sale-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 0;
+            border-bottom: 1px solid #f1f5f9;
+            transition: all 0.2s ease;
+        }
+
+        .sale-item:hover {
+            background: #f8fafc;
+            margin: 0 -24px;
+            padding: 20px 24px;
+            border-radius: 12px;
+        }
+
+        .sale-item:last-child {
+            border-bottom: none;
+        }
+
+        .sale-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .sale-info {
+            flex: 1;
+        }
+
+        .sale-info h4 {
+            color: #1e293b;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .sale-info p {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .sale-time {
+            color: #94a3b8;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .sale-amount {
+            font-weight: 700;
+            font-size: 18px;
+            color: #22c55e;
+        }
+
+        .top-products {
+            padding: 24px;
+        }
+
+        .product-rank {
             display: flex;
             align-items: center;
             gap: 16px;
@@ -835,54 +1052,80 @@
             border-bottom: 1px solid #f1f5f9;
         }
 
-        .transaction-item:last-child {
+        .product-rank:last-child {
             border-bottom: none;
         }
 
-        .transaction-icon {
+        .rank-number {
             width: 40px;
             height: 40px;
-            border-radius: 10px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1B365D, #2A4A6B);
+            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
-            color: white;
-        }
-
-        .transaction-icon.income {
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-        }
-
-        .transaction-icon.expense {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-        }
-
-        .transaction-info {
-            flex: 1;
-        }
-
-        .transaction-info h4 {
-            color: #1e293b;
-            margin-bottom: 4px;
-        }
-
-        .transaction-info p {
-            color: #64748b;
-            font-size: 14px;
-        }
-
-        .transaction-amount {
             font-weight: 700;
             font-size: 16px;
         }
 
-        .transaction-amount.positive {
-            color: #22c55e;
+        .product-rank .product-info {
+            flex: 1;
         }
 
-        .transaction-amount.negative {
-            color: #ef4444;
+        .product-rank .product-info h4 {
+            color: #1e293b;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .product-rank .product-info p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .product-revenue {
+            font-weight: 700;
+            font-size: 16px;
+            color: #1B365D;
+        }
+
+        /* Charts */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .chart-card {
+            min-height: 350px;
+        }
+
+        .chart-container {
+            padding: 24px;
+            height: 280px;
+            position: relative;
+        }
+
+        .chart-container canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        /* Dashboard Chart Section */
+        .dashboard-chart-section {
+            margin-bottom: 40px;
+        }
+
+        .dashboard-chart-section .chart-card {
+            min-height: 400px;
+        }
+
+        @media (max-width: 1024px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* Stock */
@@ -1131,6 +1374,471 @@
             box-shadow: 0 4px 15px rgba(57, 95, 105, 0.3);
         }
 
+        .btn-preview {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-preview:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+        }
+
+        /* Discount Slider */
+        .discount-slider {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .slider-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #e2e8f0;
+            outline: none;
+            opacity: 0;
+            position: relative;
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        .slider-track {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            transform: translateY(-50%);
+            overflow: hidden;
+        }
+
+        .slider-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .slider-thumb {
+            position: absolute;
+            top: 50%;
+            left: 0%;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border: 4px solid #22c55e;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .slider-thumb:hover {
+            transform: translate(-50%, -50%) scale(1.2);
+            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
+        }
+
+        .discount-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .discount-percentage {
+            font-size: 24px;
+            font-weight: 700;
+            color: #22c55e;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(22, 163, 74, 0.05));
+            padding: 8px 16px;
+            border-radius: 12px;
+            border: 2px solid rgba(34, 197, 94, 0.2);
+        }
+
+        .price-preview {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 4px;
+        }
+
+        .original-price {
+            font-size: 14px;
+            color: #94a3b8;
+            text-decoration: line-through;
+        }
+
+        .final-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1B365D;
+        }
+
+        /* Dropdown de Notificações */
+        .notifications-dropdown {
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            width: 380px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border: 1px solid #e2e8f0;
+            display: none;
+            z-index: 1001;
+            max-height: 500px;
+            overflow: hidden;
+        }
+
+        .dropdown-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dropdown-header h4 {
+            color: #1e293b;
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .mark-all-read {
+            background: none;
+            border: none;
+            color: #3b82f6;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .mark-all-read:hover {
+            background: #eff6ff;
+        }
+
+        .notifications-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .notification-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px 24px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-bottom: 1px solid #f8fafc;
+            position: relative;
+        }
+
+        .notification-item:hover {
+            background: #f8fafc;
+        }
+
+        .notification-item.unread {
+            background: #eff6ff;
+        }
+
+        .notification-item.unread::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #3b82f6;
+        }
+
+        .notification-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .notification-icon.new-order {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+        }
+
+        .notification-icon.low-stock {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+
+        .notification-icon.payment {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-content h5 {
+            color: #1e293b;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .notification-content p {
+            color: #64748b;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .notification-time {
+            color: #94a3b8;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .notification-status {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #3b82f6;
+            margin-top: 6px;
+        }
+
+        .notification-item:not(.unread) .notification-status {
+            display: none;
+        }
+
+        /* Modal Notificação */
+        .notification-modal {
+            max-width: 500px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(248,249,250,0.98) 100%);
+        }
+
+        .notification-modal .modal-header {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: white;
+            padding: 24px 30px;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .notification-modal .modal-header .notification-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .notification-modal .modal-header h3 {
+            flex: 1;
+            margin: 0;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .notification-modal .close {
+            color: rgba(255,255,255,0.8);
+            font-size: 24px;
+            background: rgba(255,255,255,0.1);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .notification-modal .close:hover {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+            padding: 0 30px 30px;
+        }
+
+        .btn-secondary {
+            background: #f8fafc;
+            color: #64748b;
+            border: 2px solid #e2e8f0;
+            padding: 12px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+
+        /* Modal Base */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            margin: 2% auto;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: modalSlideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-form {
+            overflow-y: auto;
+            max-height: calc(90vh - 200px);
+            padding: 30px;
+        }
+
+        .modal-actions {
+            padding: 20px 30px;
+            border-top: 1px solid #e2e8f0;
+            background: #f8fafc;
+            flex-shrink: 0;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Estilos para conteúdo das notificações */
+        .order-notification, .stock-alert, .payment-notification {
+            text-align: left;
+        }
+
+        .order-info, .stock-alert, .payment-notification {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .order-info h4, .stock-alert h4, .payment-notification h4 {
+            color: #1e293b;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .customer-name {
+            color: #64748b;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .customer-name strong {
+            color: #1e293b;
+        }
+
+        .order-time {
+            color: #22c55e;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .order-details h5 {
+            color: #1e293b;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .order-items ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        .order-items li {
+            padding: 8px 0;
+            color: #64748b;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .order-items li:last-child {
+            border-bottom: none;
+        }
+
+        .order-total {
+            text-align: right;
+            font-size: 18px;
+            color: #1e293b;
+            padding-top: 15px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .stock-alert p, .payment-notification p {
+            margin-bottom: 8px;
+            color: #64748b;
+        }
+
         @media (max-width: 768px) {
             .main-content {
                 margin-left: 0;
@@ -1148,13 +1856,25 @@
             .modern-sidebar {
                 transform: translateX(-100%);
             }
+
+            .notification-modal {
+                margin: 10% 20px;
+                max-width: none;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+
+            .modal-actions {
+                padding: 0 20px 20px;
+                flex-direction: column;
+            }
         }
     </style>
-=======
-    <link rel="stylesheet" href="css/dashboard.css">
->>>>>>> 76c5fb050d7556de9e4500ce4359278f35c51d3d
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="modern-dashboard">
     <!-- Top Bar -->
@@ -1168,26 +1888,10 @@
             </div>
         </div>
         <div class="top-bar-right">
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Buscar..." onkeyup="globalSearch(this.value)">
-            </div>
             <div class="notifications">
                 <button class="notification-btn" onclick="showNotifications()">
                     <i class="fas fa-bell"></i>
                     <span class="notification-badge">3</span>
-                </button>
-            </div>
-            <div class="admin-profile">
-                <div class="admin-avatar">
-                    <img src="images/logo_dr_derm_cropped.png" alt="Admin">
-                </div>
-                <div class="admin-details">
-                    <span class="admin-name">Dr Derm Admin</span>
-                    <span class="admin-role">Administrador</span>
-                </div>
-                <button class="profile-dropdown">
-                    <i class="fas fa-chevron-down"></i>
                 </button>
             </div>
         </div>
@@ -1249,93 +1953,89 @@
                 </div>
             </div>
             
+            <!-- Dashboard Chart -->
+            <div class="dashboard-chart-section">
+                <div class="content-card chart-card">
+                    <div class="card-header">
+                        <h3>Crescimento de Vendas</h3>
+                        <select class="filter-select">
+                            <option>Últimos 6 meses</option>
+                            <option>Últimos 12 meses</option>
+                        </select>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="dashboardSalesChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+
             <!-- Stats Cards -->
             <div class="stats-grid">
-                <div class="stat-card revenue">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-dollar-sign"></i>
-                        </div>
-                        <div class="card-menu" onclick="showCardMenu(this)">
-                            <i class="fas fa-ellipsis-h"></i>
-                        </div>
+                <div class="stat-card-modern revenue" onclick="showDashboardSection('financeiro')">
+                    <div class="card-icon-modern">
+                        <i class="fas fa-dollar-sign"></i>
                     </div>
-                    <div class="card-body">
-                        <h3 id="totalRevenue">R$ 12.450</h3>
+                    <div class="card-content-modern">
+                        <h3>R$ 12.450</h3>
                         <p>Receita Total</p>
                         <div class="trend positive">
                             <i class="fas fa-trending-up"></i>
-                            <span>+12.5% vs mês anterior</span>
+                            <span>+18.5%</span>
                         </div>
                     </div>
-                    <div class="card-chart">
-                        <div class="mini-chart revenue-chart"></div>
+                    <div class="card-arrow">
+                        <i class="fas fa-chevron-right"></i>
                     </div>
                 </div>
                 
-                <div class="stat-card orders">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-shopping-cart"></i>
-                        </div>
-                        <div class="card-menu" onclick="showCardMenu(this)">
-                            <i class="fas fa-ellipsis-h"></i>
-                        </div>
+                <div class="stat-card-modern orders" onclick="showDashboardSection('pedidos')">
+                    <div class="card-icon-modern">
+                        <i class="fas fa-shopping-bag"></i>
                     </div>
-                    <div class="card-body">
-                        <h3 id="totalOrders">156</h3>
+                    <div class="card-content-modern">
+                        <h3>156</h3>
                         <p>Pedidos</p>
                         <div class="trend positive">
                             <i class="fas fa-trending-up"></i>
-                            <span>+8.2% vs mês anterior</span>
+                            <span>+12.3%</span>
                         </div>
                     </div>
-                    <div class="card-chart">
-                        <div class="mini-chart orders-chart"></div>
-                    </div>
-                </div>
-                
-                <div class="stat-card products">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-cube"></i>
-                        </div>
-                        <div class="card-menu" onclick="showCardMenu(this)">
-                            <i class="fas fa-ellipsis-h"></i>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 id="totalProducts">48</h3>
-                        <p>Produtos Ativos</p>
-                        <div class="trend neutral">
-                            <i class="fas fa-minus"></i>
-                            <span>Sem alteração</span>
-                        </div>
-                    </div>
-                    <div class="card-chart">
-                        <div class="mini-chart products-chart"></div>
+                    <div class="card-arrow">
+                        <i class="fas fa-chevron-right"></i>
                     </div>
                 </div>
                 
-                <div class="stat-card customers">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="card-menu" onclick="showCardMenu(this)">
-                            <i class="fas fa-ellipsis-h"></i>
-                        </div>
+                <div class="stat-card-modern customers" onclick="alert('Seção de Clientes em desenvolvimento')">
+                    <div class="card-icon-modern">
+                        <i class="fas fa-users"></i>
                     </div>
-                    <div class="card-body">
-                        <h3 id="totalCustomers">234</h3>
-                        <p>Clientes</p>
+                    <div class="card-content-modern">
+                        <h3>234</h3>
+                        <p>Clientes Logados</p>
                         <div class="trend positive">
                             <i class="fas fa-trending-up"></i>
-                            <span>+15.3% vs mês anterior</span>
+                            <span>+15.3%</span>
                         </div>
                     </div>
-                    <div class="card-chart">
-                        <div class="mini-chart customers-chart"></div>
+                    <div class="card-arrow">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+                
+                <div class="stat-card-modern stock" onclick="showDashboardSection('estoque')">
+                    <div class="card-icon-modern">
+                        <i class="fas fa-boxes"></i>
+                    </div>
+                    <div class="card-content-modern">
+                        <h3>892</h3>
+                        <p>Itens em Estoque</p>
+                        <div class="trend warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>2 baixos</span>
+                        </div>
+                    </div>
+                    <div class="card-arrow">
+                        <i class="fas fa-chevron-right"></i>
                     </div>
                 </div>
             </div>
@@ -1344,7 +2044,7 @@
             <div class="quick-actions">
                 <h2>Ações Rápidas</h2>
                 <div class="actions-grid">
-                    <button class="action-card" onclick="showAddProduct()">
+                    <button class="action-card" onclick="showDashboardSection('produtos')">
                         <i class="fas fa-plus"></i>
                         <span>Novo Produto</span>
                     </button>
@@ -1352,11 +2052,11 @@
                         <i class="fas fa-eye"></i>
                         <span>Ver Pedidos</span>
                     </button>
-                    <button class="action-card" onclick="exportReport()">
+                    <button class="action-card" onclick="showDashboardSection('financeiro')">
                         <i class="fas fa-chart-bar"></i>
                         <span>Relatórios</span>
                     </button>
-                    <button class="action-card" onclick="showSettings()">
+                    <button class="action-card" onclick="alert('Configurações em desenvolvimento')">
                         <i class="fas fa-cog"></i>
                         <span>Configurações</span>
                     </button>
@@ -1395,7 +2095,7 @@
                 </div>
                 
                 <div class="products-grid" id="productsGrid">
-                    <div class="product-item" data-status="active" data-name="serum vitamina c">
+                    <div class="product-item" data-status="active" data-name="serum vitamina c" data-product-id="1">
                         <div class="product-image">
                             <img src="https://via.placeholder.com/80x80/1B365D/FFFFFF?text=S" alt="Produto">
                         </div>
@@ -1411,7 +2111,7 @@
                             <span class="status-badge active">Ativo</span>
                         </div>
                         <div class="product-actions">
-                            <button class="btn-icon" onclick="editProduct(1, 'Serum Vitamina C', 89.90, 25, 'Serum anti-idade')" title="Editar">
+                            <button class="btn-icon" onclick="editProduct(1)" title="Editar">
                                 <i class="fas fa-edit"></i>
                             </button>
                             <button class="btn-icon danger" onclick="deleteProduct(1)" title="Excluir">
@@ -1420,7 +2120,7 @@
                         </div>
                     </div>
                     
-                    <div class="product-item" data-status="active" data-name="hidratante facial">
+                    <div class="product-item" data-status="active" data-name="hidratante facial" data-product-id="2">
                         <div class="product-image">
                             <img src="https://via.placeholder.com/80x80/1B365D/FFFFFF?text=H" alt="Produto">
                         </div>
@@ -1436,7 +2136,7 @@
                             <span class="status-badge active">Ativo</span>
                         </div>
                         <div class="product-actions">
-                            <button class="btn-icon" onclick="editProduct(2, 'Hidratante Facial', 65.90, 5, 'Hidratante para pele seca')" title="Editar">
+                            <button class="btn-icon" onclick="editProduct(2)" title="Editar">
                                 <i class="fas fa-edit"></i>
                             </button>
                             <button class="btn-icon danger" onclick="deleteProduct(2)" title="Excluir">
@@ -1616,83 +2316,180 @@
         <section id="financeiro" class="page-section">
             <div class="page-header">
                 <div>
-                    <h1>Financeiro</h1>
-                    <p>Acompanhe o desempenho financeiro</p>
+                    <h1>Vendas & Receitas</h1>
+                    <p>Acompanhe as vendas e lucros do site</p>
                 </div>
-                <button class="btn-primary" onclick="exportReport()">
+                <button class="btn-primary" onclick="exportSalesReport()">
                     <i class="fas fa-download"></i>
-                    Exportar Relatório
+                    Exportar Vendas
                 </button>
             </div>
             
-            <div class="financial-overview">
-                <div class="financial-card revenue">
+            <div class="sales-overview">
+                <div class="sales-card total-sales">
                     <div class="card-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>R$ 12.450</h3>
+                        <p>Vendas Totais</p>
+                        <span class="period">Este mês</span>
+                    </div>
+                    <div class="card-trend positive">
                         <i class="fas fa-arrow-up"></i>
-                    </div>
-                    <div class="card-content">
-                        <h3>R$ 45.230</h3>
-                        <p>Receita Total</p>
-                        <span class="period">Este mês</span>
+                        <span>+18.5%</span>
                     </div>
                 </div>
                 
-                <div class="financial-card expenses">
+                <div class="sales-card orders-count">
                     <div class="card-icon">
-                        <i class="fas fa-arrow-down"></i>
+                        <i class="fas fa-receipt"></i>
                     </div>
                     <div class="card-content">
-                        <h3>R$ 18.450</h3>
-                        <p>Despesas</p>
+                        <h3>156</h3>
+                        <p>Pedidos Vendidos</p>
                         <span class="period">Este mês</span>
+                    </div>
+                    <div class="card-trend positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>+12.3%</span>
                     </div>
                 </div>
                 
-                <div class="financial-card profit">
+                <div class="sales-card avg-ticket">
                     <div class="card-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
                     <div class="card-content">
-                        <h3>R$ 26.780</h3>
-                        <p>Lucro Líquido</p>
+                        <h3>R$ 79,80</h3>
+                        <p>Ticket Médio</p>
                         <span class="period">Este mês</span>
+                    </div>
+                    <div class="card-trend positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>+5.2%</span>
                     </div>
                 </div>
             </div>
             
             <div class="content-card">
                 <div class="card-header">
-                    <h3>Últimas Transações</h3>
+                    <h3>Vendas Recentes</h3>
                     <div class="filters">
                         <select class="filter-select">
-                            <option>Últimos 30 dias</option>
-                            <option>Últimos 7 dias</option>
                             <option>Hoje</option>
+                            <option>Últimos 7 dias</option>
+                            <option>Últimos 30 dias</option>
                         </select>
                     </div>
                 </div>
                 
-                <div class="transactions-list">
-                    <div class="transaction-item">
-                        <div class="transaction-icon income">
-                            <i class="fas fa-plus"></i>
+                <div class="sales-list">
+                    <div class="sale-item">
+                        <div class="sale-icon">
+                            <i class="fas fa-shopping-bag"></i>
                         </div>
-                        <div class="transaction-info">
-                            <h4>Venda - Pedido #12345</h4>
-                            <p>20/12/2023 às 14:30</p>
+                        <div class="sale-info">
+                            <h4>Pedido #12346 - Maria Silva</h4>
+                            <p>Serum Vitamina C, Hidratante Facial</p>
+                            <span class="sale-time">Hoje às 14:30</span>
                         </div>
-                        <div class="transaction-amount positive">+R$ 155,80</div>
+                        <div class="sale-amount">R$ 155,80</div>
                     </div>
                     
-                    <div class="transaction-item">
-                        <div class="transaction-icon expense">
-                            <i class="fas fa-minus"></i>
+                    <div class="sale-item">
+                        <div class="sale-icon">
+                            <i class="fas fa-shopping-bag"></i>
                         </div>
-                        <div class="transaction-info">
-                            <h4>Compra de Estoque</h4>
-                            <p>19/12/2023 às 09:15</p>
+                        <div class="sale-info">
+                            <h4>Pedido #12345 - João Santos</h4>
+                            <p>Protetor Solar FPS 60</p>
+                            <span class="sale-time">Hoje às 11:15</span>
                         </div>
-                        <div class="transaction-amount negative">-R$ 2.500,00</div>
+                        <div class="sale-amount">R$ 45,90</div>
+                    </div>
+                    
+                    <div class="sale-item">
+                        <div class="sale-icon">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <div class="sale-info">
+                            <h4>Pedido #12344 - Ana Costa</h4>
+                            <p>Ácido Hialurônico Premium, Peeling Químico</p>
+                            <span class="sale-time">Ontem às 16:45</span>
+                        </div>
+                        <div class="sale-amount">R$ 489,80</div>
+                    </div>
+                    
+                    <div class="sale-item">
+                        <div class="sale-icon">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <div class="sale-info">
+                            <h4>Pedido #12343 - Carlos Lima</h4>
+                            <p>Toxina Botulínica Tipo A</p>
+                            <span class="sale-time">Ontem às 09:20</span>
+                        </div>
+                        <div class="sale-amount">R$ 1.299,90</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="charts-grid">
+                <div class="content-card chart-card">
+                    <div class="card-header">
+                        <h3>Crescimento de Vendas</h3>
+                        <select class="filter-select">
+                            <option>Últimos 6 meses</option>
+                            <option>Últimos 12 meses</option>
+                        </select>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="salesChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+                
+                <div class="content-card chart-card">
+                    <div class="card-header">
+                        <h3>Produtos Mais Vendidos</h3>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="productsChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <div class="card-header">
+                    <h3>Ranking de Produtos</h3>
+                </div>
+                
+                <div class="top-products">
+                    <div class="product-rank">
+                        <div class="rank-number">1</div>
+                        <div class="product-info">
+                            <h4>Serum Vitamina C</h4>
+                            <p>45 vendas este mês</p>
+                        </div>
+                        <div class="product-revenue">R$ 4.045,50</div>
+                    </div>
+                    
+                    <div class="product-rank">
+                        <div class="rank-number">2</div>
+                        <div class="product-info">
+                            <h4>Hidratante Facial</h4>
+                            <p>32 vendas este mês</p>
+                        </div>
+                        <div class="product-revenue">R$ 2.108,80</div>
+                    </div>
+                    
+                    <div class="product-rank">
+                        <div class="rank-number">3</div>
+                        <div class="product-info">
+                            <h4>Protetor Solar FPS 60</h4>
+                            <p>28 vendas este mês</p>
+                        </div>
+                        <div class="product-revenue">R$ 1.285,20</div>
                     </div>
                 </div>
             </div>
@@ -1773,12 +2570,33 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Preço</label>
-                        <input type="number" step="0.01" id="editProductPrice" required>
+                        <label>Preço Base</label>
+                        <input type="number" step="0.01" id="editProductBasePrice" required>
                     </div>
                     <div class="form-group">
                         <label>Estoque</label>
                         <input type="number" id="editProductStock" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Desconto</label>
+                    <div class="discount-slider">
+                        <div class="slider-container">
+                            <input type="range" id="discountSlider" min="0" max="50" value="0" class="slider">
+                            <div class="slider-track">
+                                <div class="slider-fill"></div>
+                                <div class="slider-thumb"></div>
+                            </div>
+                        </div>
+                        <div class="discount-info">
+                            <div class="discount-percentage">
+                                <span id="discountValue">0</span>% OFF
+                            </div>
+                            <div class="price-preview">
+                                <span class="original-price">R$ <span id="originalPrice">0,00</span></span>
+                                <span class="final-price">R$ <span id="finalPrice">0,00</span></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -1791,16 +2609,625 @@
                 </div>
                 <div class="modal-actions">
                     <button type="button" class="btn-cancel" onclick="closeEditProduct()">Cancelar</button>
-                    <button type="submit" class="btn-save">Salvar Alterações</button>
+                    <button type="button" class="btn-preview" onclick="previewChanges()">Visualizar Alterações</button>
+                    <button type="submit" class="btn-save">Confirmar Alterações</button>
                 </div>
             </form>
         </div>
     </div>
 
+    <!-- Dropdown de Notificações -->
+    <div id="notificationsDropdown" class="notifications-dropdown">
+        <div class="dropdown-header">
+            <h4>Notificações</h4>
+            <button class="mark-all-read" onclick="markAllAsRead()">Marcar todas como lidas</button>
+        </div>
+        <div class="notifications-list" id="notificationsList">
+            <div class="notification-item unread" onclick="openNotificationDetails(1)">
+                <div class="notification-icon new-order">
+                    <i class="fas fa-shopping-bag"></i>
+                </div>
+                <div class="notification-content">
+                    <h5>Novo Pedido #12346</h5>
+                    <p>Maria Silva fez um pedido</p>
+                    <span class="notification-time">2 min atrás</span>
+                </div>
+                <div class="notification-status"></div>
+            </div>
+            <div class="notification-item unread" onclick="openNotificationDetails(2)">
+                <div class="notification-icon low-stock">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="notification-content">
+                    <h5>Estoque Baixo</h5>
+                    <p>Hidratante Facial com apenas 5 unidades</p>
+                    <span class="notification-time">15 min atrás</span>
+                </div>
+                <div class="notification-status"></div>
+            </div>
+            <div class="notification-item" onclick="openNotificationDetails(3)">
+                <div class="notification-icon payment">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                <div class="notification-content">
+                    <h5>Pagamento Aprovado</h5>
+                    <p>Pedido #12345 - R$ 299,90</p>
+                    <span class="notification-time">1 hora atrás</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Detalhes da Notificação -->
+    <div id="notificationModal" class="modal">
+        <div class="modal-content notification-modal">
+            <div class="modal-header">
+                <div class="notification-icon" id="modalIcon">
+                    <i class="fas fa-shopping-bag"></i>
+                </div>
+                <h3 id="modalTitle">Novo Pedido Recebido!</h3>
+                <span class="close" onclick="closeNotificationModal()">&times;</span>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Conteúdo será inserido dinamicamente -->
+            </div>
+            <div class="modal-actions" id="modalActions">
+                <button class="btn-secondary" onclick="closeNotificationModal()">Fechar</button>
+                <button class="btn-primary" id="primaryAction">Ver Detalhes</button>
+            </div>
+        </div>
+    </div>
+
     <script src="dashboard.js"></script>
+    <script>
+        // Dados das notificações
+        const notifications = {
+            1: {
+                type: 'new-order',
+                title: 'Novo Pedido Recebido!',
+                icon: 'fas fa-shopping-bag',
+                headerColor: 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)',
+                content: `
+                    <div class="order-notification">
+                        <div class="order-info">
+                            <h4>Pedido #12346</h4>
+                            <p class="customer-name">Cliente: <strong>Maria Silva</strong></p>
+                            <p class="order-time">Recebido há 2 minutos</p>
+                        </div>
+                        <div class="order-details">
+                            <div class="order-items">
+                                <h5>Itens do Pedido:</h5>
+                                <ul>
+                                    <li>Serum Vitamina C - R$ 89,90</li>
+                                    <li>Hidratante Facial - R$ 65,90</li>
+                                </ul>
+                            </div>
+                            <div class="order-total">
+                                <strong>Total: R$ 155,80</strong>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                action: () => showDashboardSection('pedidos')
+            },
+            2: {
+                type: 'low-stock',
+                title: 'Alerta de Estoque Baixo',
+                icon: 'fas fa-exclamation-triangle',
+                headerColor: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+                content: `
+                    <div class="stock-alert">
+                        <h4>Produto com estoque baixo</h4>
+                        <p><strong>Hidratante Facial</strong></p>
+                        <p>Estoque atual: <span style="color: #ef4444; font-weight: 600;">5 unidades</span></p>
+                        <p>Estoque mínimo: 10 unidades</p>
+                        <p style="margin-top: 15px; color: #64748b;">Recomendamos reabastecer o estoque o quanto antes.</p>
+                    </div>
+                `,
+                action: () => showDashboardSection('estoque')
+            },
+            3: {
+                type: 'payment',
+                title: 'Pagamento Aprovado',
+                icon: 'fas fa-credit-card',
+                headerColor: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
+                content: `
+                    <div class="payment-notification">
+                        <h4>Pagamento processado com sucesso</h4>
+                        <p><strong>Pedido #12345</strong></p>
+                        <p>Valor: <strong>R$ 299,90</strong></p>
+                        <p>Método: Cartão de Crédito</p>
+                        <p style="margin-top: 15px; color: #22c55e; font-weight: 600;">Status: Aprovado</p>
+                    </div>
+                `,
+                action: () => showDashboardSection('financeiro')
+            }
+        };
+
+        // Função para mostrar/ocultar dropdown de notificações
+        function showNotifications() {
+            const dropdown = document.getElementById('notificationsDropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Função para abrir detalhes da notificação
+        function openNotificationDetails(notificationId) {
+            const notification = notifications[notificationId];
+            if (!notification) return;
+
+            // Fechar dropdown
+            document.getElementById('notificationsDropdown').style.display = 'none';
+
+            // Configurar modal
+            const modal = document.getElementById('notificationModal');
+            const modalHeader = modal.querySelector('.modal-header');
+            const modalIcon = document.getElementById('modalIcon');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            const primaryAction = document.getElementById('primaryAction');
+
+            // Atualizar conteúdo
+            modalHeader.style.background = notification.headerColor;
+            modalIcon.innerHTML = `<i class="${notification.icon}"></i>`;
+            modalTitle.textContent = notification.title;
+            modalBody.innerHTML = notification.content;
+            
+            // Configurar ação primária
+            primaryAction.onclick = () => {
+                closeNotificationModal();
+                notification.action();
+            };
+
+            // Mostrar modal
+            modal.style.display = 'block';
+
+            // Marcar como lida
+            markAsRead(notificationId);
+        }
+
+        // Função para fechar modal de notificação
+        function closeNotificationModal() {
+            document.getElementById('notificationModal').style.display = 'none';
+        }
+
+        // Função para marcar notificação como lida
+        function markAsRead(notificationId) {
+            const notificationItems = document.querySelectorAll('.notification-item');
+            if (notificationItems[notificationId - 1]) {
+                notificationItems[notificationId - 1].classList.remove('unread');
+            }
+            updateNotificationBadge();
+        }
+
+        // Função para marcar todas como lidas
+        function markAllAsRead() {
+            document.querySelectorAll('.notification-item.unread').forEach(item => {
+                item.classList.remove('unread');
+            });
+            updateNotificationBadge();
+        }
+
+        // Função para atualizar badge de notificações
+        function updateNotificationBadge() {
+            const unreadCount = document.querySelectorAll('.notification-item.unread').length;
+            const badge = document.querySelector('.notification-badge');
+            badge.textContent = unreadCount;
+            badge.style.display = unreadCount > 0 ? 'block' : 'none';
+        }
+
+        // Fechar dropdown ao clicar fora
+        document.addEventListener('click', (e) => {
+            const dropdown = document.getElementById('notificationsDropdown');
+            const notificationBtn = document.querySelector('.notification-btn');
+            
+            if (!dropdown.contains(e.target) && !notificationBtn.contains(e.target)) {
+                dropdown.style.display = 'none';
+            }
+        });
+
+        // Base de dados dos produtos
+        let productsData = {
+            1: {
+                id: 1,
+                name: 'Serum Vitamina C',
+                category: 'facial',
+                basePrice: 105.90,
+                discount: 15,
+                finalPrice: 89.90,
+                stock: 25,
+                description: 'Serum anti-idade com vitamina C concentrada'
+            },
+            2: {
+                id: 2,
+                name: 'Hidratante Facial',
+                category: 'facial',
+                basePrice: 65.90,
+                discount: 0,
+                finalPrice: 65.90,
+                stock: 5,
+                description: 'Hidratante para pele seca e sensível'
+            }
+        };
+
+        // Inicializar badge
+        document.addEventListener('DOMContentLoaded', () => {
+            updateNotificationBadge();
+            initializeCharts();
+            initializeDiscountSlider();
+            loadProductsFromStorage();
+        });
+
+        // Carregar produtos do localStorage
+        function loadProductsFromStorage() {
+            const stored = localStorage.getItem('productsData');
+            if (stored) {
+                productsData = JSON.parse(stored);
+            }
+        }
+
+        // Salvar produtos no localStorage
+        function saveProductsToStorage() {
+            localStorage.setItem('productsData', JSON.stringify(productsData));
+        }
+
+        // Inicializar medidor de desconto
+        function initializeDiscountSlider() {
+            const slider = document.getElementById('discountSlider');
+            const sliderFill = document.querySelector('.slider-fill');
+            const sliderThumb = document.querySelector('.slider-thumb');
+            const discountValue = document.getElementById('discountValue');
+            const originalPrice = document.getElementById('originalPrice');
+            const finalPrice = document.getElementById('finalPrice');
+            const basePriceInput = document.getElementById('editProductBasePrice');
+
+            if (!slider) return;
+
+            function updateSlider() {
+                const value = slider.value;
+                const percentage = (value / slider.max) * 100;
+                
+                // Atualizar visual do slider
+                sliderFill.style.width = percentage + '%';
+                sliderThumb.style.left = percentage + '%';
+                
+                // Atualizar valores
+                discountValue.textContent = value;
+                
+                const basePrice = parseFloat(basePriceInput.value) || 0;
+                const discountAmount = (basePrice * value) / 100;
+                const finalPriceValue = basePrice - discountAmount;
+                
+                originalPrice.textContent = basePrice.toFixed(2).replace('.', ',');
+                finalPrice.textContent = finalPriceValue.toFixed(2).replace('.', ',');
+                
+                // Atualizar cor baseada no desconto
+                if (value > 30) {
+                    sliderFill.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
+                    sliderThumb.style.borderColor = '#ef4444';
+                } else if (value > 15) {
+                    sliderFill.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
+                    sliderThumb.style.borderColor = '#f59e0b';
+                } else {
+                    sliderFill.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+                    sliderThumb.style.borderColor = '#22c55e';
+                }
+            }
+
+            slider.addEventListener('input', updateSlider);
+            basePriceInput.addEventListener('input', updateSlider);
+            
+            // Inicializar
+            updateSlider();
+        }
+
+        // Variável global para armazenar o ID do produto sendo editado
+        let currentEditingProductId = null;
+
+        // Funções do modal de produtos
+        function editProduct(id) {
+            const product = productsData[id];
+            if (!product) return;
+            
+            currentEditingProductId = id;
+            
+            // Preencher campos do modal
+            document.getElementById('editProductName').value = product.name;
+            document.getElementById('editProductCategory').value = product.category;
+            document.getElementById('editProductBasePrice').value = product.basePrice;
+            document.getElementById('editProductStock').value = product.stock;
+            document.getElementById('editProductDescription').value = product.description;
+            
+            // Configurar slider de desconto
+            document.getElementById('discountSlider').value = product.discount;
+            
+            // Atualizar slider
+            setTimeout(() => {
+                const event = new Event('input');
+                document.getElementById('discountSlider').dispatchEvent(event);
+            }, 100);
+            
+            // Mostrar modal
+            document.getElementById('editProductModal').style.display = 'block';
+        }
+
+        function closeEditProduct() {
+            document.getElementById('editProductModal').style.display = 'none';
+            currentEditingProductId = null;
+        }
+
+        function saveProductEdit(event) {
+            event.preventDefault();
+            
+            if (!currentEditingProductId) return;
+            
+            const name = document.getElementById('editProductName').value;
+            const category = document.getElementById('editProductCategory').value;
+            const basePrice = parseFloat(document.getElementById('editProductBasePrice').value);
+            const stock = parseInt(document.getElementById('editProductStock').value);
+            const description = document.getElementById('editProductDescription').value;
+            const discount = parseInt(document.getElementById('discountSlider').value);
+            
+            // Calcular preço final
+            const finalPrice = basePrice - (basePrice * discount / 100);
+            
+            // Atualizar produto
+            productsData[currentEditingProductId] = {
+                ...productsData[currentEditingProductId],
+                name,
+                category,
+                basePrice,
+                discount,
+                finalPrice,
+                stock,
+                description
+            };
+            
+            // Salvar no localStorage
+            saveProductsToStorage();
+            
+            // Atualizar exibição
+            updateProductDisplay(currentEditingProductId);
+            
+            alert('Produto atualizado com sucesso!');
+            closeEditProduct();
+        }
+
+        function deleteProduct(id) {
+            if (confirm('Tem certeza que deseja excluir este produto?')) {
+                delete productsData[id];
+                saveProductsToStorage();
+                
+                // Remover da exibição
+                const productElement = document.querySelector(`[data-product-id="${id}"]`);
+                if (productElement) {
+                    productElement.remove();
+                }
+                
+                alert('Produto excluído com sucesso!');
+            }
+        }
+
+        // Atualizar exibição de um produto específico
+        function updateProductDisplay(id) {
+            const product = productsData[id];
+            if (!product) return;
+            
+            const productElement = document.querySelector(`[data-product-id="${id}"]`);
+            if (!productElement) return;
+            
+            // Atualizar nome
+            productElement.querySelector('h4').textContent = product.name;
+            
+            // Atualizar categoria
+            productElement.querySelector('p').textContent = getCategoryName(product.category);
+            
+            // Atualizar preço
+            productElement.querySelector('.price').textContent = `R$ ${product.finalPrice.toFixed(2).replace('.', ',')}`;
+            
+            // Atualizar estoque
+            const stockElement = productElement.querySelector('.stock');
+            stockElement.textContent = `${product.stock} em estoque`;
+            stockElement.className = `stock ${product.stock <= 10 ? 'low' : ''}`;
+        }
+
+        // Obter nome da categoria
+        function getCategoryName(category) {
+            const categories = {
+                'facial': 'Cuidados Faciais',
+                'corporal': 'Cuidados Corporais',
+                'protetor': 'Protetor Solar'
+            };
+            return categories[category] || 'Outros';
+        }
+
+        // Função para visualizar alterações
+        function previewChanges() {
+            if (!currentEditingProductId) return;
+            
+            const currentProduct = productsData[currentEditingProductId];
+            const name = document.getElementById('editProductName').value;
+            const category = document.getElementById('editProductCategory').value;
+            const basePrice = parseFloat(document.getElementById('editProductBasePrice').value);
+            const stock = parseInt(document.getElementById('editProductStock').value);
+            const discount = parseInt(document.getElementById('discountSlider').value);
+            const finalPrice = basePrice - (basePrice * discount / 100);
+            
+            const changes = [];
+            
+            if (currentProduct.name !== name) {
+                changes.push(`Nome: "${currentProduct.name}" → "${name}"`);
+            }
+            if (currentProduct.basePrice !== basePrice) {
+                changes.push(`Preço Base: R$ ${currentProduct.basePrice.toFixed(2)} → R$ ${basePrice.toFixed(2)}`);
+            }
+            if (currentProduct.discount !== discount) {
+                changes.push(`Desconto: ${currentProduct.discount}% → ${discount}%`);
+            }
+            if (currentProduct.finalPrice.toFixed(2) !== finalPrice.toFixed(2)) {
+                changes.push(`Preço Final: R$ ${currentProduct.finalPrice.toFixed(2)} → R$ ${finalPrice.toFixed(2)}`);
+            }
+            if (currentProduct.stock !== stock) {
+                changes.push(`Estoque: ${currentProduct.stock} → ${stock}`);
+            }
+            
+            if (changes.length === 0) {
+                alert('Nenhuma alteração foi feita.');
+            } else {
+                const message = 'Alterações que serão aplicadas:\n\n' + changes.join('\n');
+                alert(message);
+            }
+        }
+
+        // Fechar modal ao clicar no X ou fora do modal
+        window.onclick = function(event) {
+            const editModal = document.getElementById('editProductModal');
+            if (event.target === editModal) {
+                closeEditProduct();
+            }
+        }
+
+        // Inicializar gráficos
+        function initializeCharts() {
+            // Gráfico de Crescimento de Vendas
+            const salesCtx = document.getElementById('salesChart');
+            if (salesCtx) {
+                new Chart(salesCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                        datasets: [{
+                            label: 'Vendas (R$)',
+                            data: [8500, 9200, 10100, 11300, 10800, 12450],
+                            borderColor: '#22c55e',
+                            backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4,
+                            pointBackgroundColor: '#22c55e',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2,
+                            pointRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(0,0,0,0.05)'
+                                },
+                                ticks: {
+                                    callback: function(value) {
+                                        return 'R$ ' + value.toLocaleString();
+                                    }
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Gráfico de Produtos Mais Vendidos
+            const productsCtx = document.getElementById('productsChart');
+            if (productsCtx) {
+                new Chart(productsCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Serum Vitamina C', 'Hidratante Facial', 'Protetor Solar', 'Outros'],
+                        datasets: [{
+                            data: [45, 32, 28, 51],
+                            backgroundColor: [
+                                '#22c55e',
+                                '#3b82f6',
+                                '#8b5cf6',
+                                '#f59e0b'
+                            ],
+                            borderWidth: 0,
+                            hoverOffset: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    padding: 20,
+                                    usePointStyle: true,
+                                    font: {
+                                        size: 12
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Gráfico de Crescimento no Dashboard Principal
+            const dashboardSalesCtx = document.getElementById('dashboardSalesChart');
+            if (dashboardSalesCtx) {
+                new Chart(dashboardSalesCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                        datasets: [{
+                            label: 'Vendas (R$)',
+                            data: [8500, 9200, 10100, 11300, 10800, 12450],
+                            borderColor: '#22c55e',
+                            backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4,
+                            pointBackgroundColor: '#22c55e',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2,
+                            pointRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(0,0,0,0.05)'
+                                },
+                                ticks: {
+                                    callback: function(value) {
+                                        return 'R$ ' + value.toLocaleString();
+                                    }
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+    </script>
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> 76c5fb050d7556de9e4500ce4359278f35c51d3d
