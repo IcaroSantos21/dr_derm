@@ -758,6 +758,7 @@
 <body>
     <!-- Header -->
     <header class="header profile-header-simple">
+    <header class="header">
         <div class="container">
             <div class="logo">
                 <a href="index.html"><img src="images/logo_dr_derm_cropped.png" alt="Dr Derm" class="logo-img"></a>
@@ -1030,25 +1031,43 @@
             avatarImg.src = `https://via.placeholder.com/80x80/395f69/FFFFFF?text=${initials}`;
         }
         
-        // Salvar dados do perfil
-        function saveProfileData() {
+        // Salvar dados do perfil via API
+        async function saveProfileData() {
             const formData = {
                 name: document.getElementById('profile-name').value,
                 lastname: document.getElementById('profile-lastname').value,
-                email: document.getElementById('profile-email').value,
                 phone: document.getElementById('profile-phone').value,
                 birthdate: document.getElementById('profile-birthdate').value
             };
             
-            // Salvar no localStorage
-            localStorage.setItem('userName', formData.name);
-            localStorage.setItem('userLastname', formData.lastname);
-            localStorage.setItem('userEmail', formData.email);
-            localStorage.setItem('userPhone', formData.phone);
-            localStorage.setItem('userBirthdate', formData.birthdate);
-            
-            alert('Dados salvos com sucesso!');
-            loadUserData(); // Recarregar dados
+            try {
+                const response = await fetch('http://127.0.0.1:5000/api/profile', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(formData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Atualizar localStorage
+                    localStorage.setItem('userName', data.user.name);
+                    localStorage.setItem('userLastname', data.user.lastname);
+                    localStorage.setItem('userPhone', data.user.phone);
+                    localStorage.setItem('userBirthdate', data.user.birthdate || '');
+                    
+                    alert('Dados salvos com sucesso!');
+                    loadUserData(); // Recarregar dados
+                } else {
+                    alert(data.error || 'Erro ao salvar dados');
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Erro de conexão. Verifique se o servidor está rodando.');
+            }
         }
         
         // Verificar login e carregar dados ao carregar a página
@@ -1064,13 +1083,29 @@
         
         // Função de logout
         function logout() {
+        }
+        
+        // Função de logout via API
+        async function logout() {
             if(confirm('Tem certeza que deseja sair?')) {
+                try {
+                    await fetch('http://127.0.0.1:5000/api/logout', {
+                        method: 'POST',
+                        credentials: 'include'
+                    });
+                } catch (error) {
+                    console.error('Erro no logout:', error);
+                }
+                
+                // Limpar localStorage
                 localStorage.removeItem('userLoggedIn');
                 localStorage.removeItem('userName');
                 localStorage.removeItem('userLastname');
                 localStorage.removeItem('userEmail');
                 localStorage.removeItem('userPhone');
                 localStorage.removeItem('userBirthdate');
+                localStorage.removeItem('userType');
+                
                 alert('Logout realizado com sucesso!');
                 window.location.href = 'index.html';
             }

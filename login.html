@@ -947,29 +947,53 @@
             }
         }
 
-        // Autenticação do administrador e usuários
-        document.getElementById('login-form-element').addEventListener('submit', function(e) {
+        // Autenticação via API
+        document.getElementById('login-form-element').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const email = document.getElementById('login-email').value;
             const password = document.getElementById('login-password').value;
             
-            // Credenciais do administrador
-            if (email === 'admin@drderm.com' && password === '123456') {
-                localStorage.setItem('userLoggedIn', 'true');
-                localStorage.setItem('userType', 'admin');
-                window.location.href = 'dashboard.html';
-            } else {
-                // Login de usuário comum (simulação)
-                localStorage.setItem('userLoggedIn', 'true');
-                localStorage.setItem('userType', 'customer');
-                localStorage.setItem('userEmail', email);
-                window.location.href = 'perfil.html';
+            try {
+                const response = await fetch('http://127.0.0.1:5000/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Salvar dados no localStorage
+                    localStorage.setItem('userLoggedIn', 'true');
+                    localStorage.setItem('userType', data.user.user_type);
+                    localStorage.setItem('userName', data.user.name);
+                    localStorage.setItem('userLastname', data.user.lastname || '');
+                    localStorage.setItem('userEmail', data.user.email);
+                    localStorage.setItem('userPhone', data.user.phone || '');
+                    
+                    alert('Login realizado com sucesso!');
+                    
+                    // Redirecionar baseado no tipo de usuário
+                    if (data.user.user_type === 'admin') {
+                        window.location.href = 'dashboard.html';
+                    } else {
+                        window.location.href = 'perfil.html';
+                    }
+                } else {
+                    alert(data.error || 'Erro no login');
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Erro de conexão. Verifique se o servidor está rodando.');
             }
         });
         
-        // Cadastro de usuário
-        document.getElementById('register-form-element').addEventListener('submit', function(e) {
+        // Cadastro via API
+        document.getElementById('register-form-element').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const formData = {
@@ -987,16 +1011,36 @@
                 return;
             }
             
-            // Salvar dados do usuário
-            localStorage.setItem('userLoggedIn', 'true');
-            localStorage.setItem('userType', 'customer');
-            localStorage.setItem('userName', formData.name);
-            localStorage.setItem('userLastname', formData.lastname);
-            localStorage.setItem('userEmail', formData.email);
-            localStorage.setItem('userPhone', formData.phone);
-            
-            alert('Cadastro realizado com sucesso!');
-            window.location.href = 'perfil.html';
+            try {
+                const response = await fetch('http://127.0.0.1:5000/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(formData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Salvar dados no localStorage
+                    localStorage.setItem('userLoggedIn', 'true');
+                    localStorage.setItem('userType', data.user.user_type);
+                    localStorage.setItem('userName', data.user.name);
+                    localStorage.setItem('userLastname', data.user.lastname);
+                    localStorage.setItem('userEmail', data.user.email);
+                    localStorage.setItem('userPhone', data.user.phone);
+                    
+                    alert('Cadastro realizado com sucesso!');
+                    window.location.href = 'perfil.html';
+                } else {
+                    alert(data.error || 'Erro no cadastro');
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Erro de conexão. Verifique se o servidor está rodando.');
+            }
         });
 
         // Limpar erros ao digitar
